@@ -2,7 +2,7 @@ import AuthModule from "@/features/auth/AuthModule";
 
 const AuthPage = () => {
   return (
-    <div className="max-w-md w-full mx-auto my-auto border rounded-lg p-8">
+    <div className="flex items-center justify-center min-h-full w-full">
       <AuthModule />
     </div>
   );

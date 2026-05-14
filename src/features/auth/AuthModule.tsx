@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useLogin, useRegister } from "./hooks/auth";
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
+import Button from "@/shared/ui/Button/Button";
 
 const AuthModule = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -25,20 +26,24 @@ const AuthModule = () => {
   };
 
   return (
-    <div className="w-full max-w-md">
-      <div className="flex gap-2 mb-6">
-        <button
+    <div className="w-full h-full">
+      <div className="flex justify-end gap-4 mb-5">
+        <Button
+          variant={isLogin ? "primary" : "secondary"}
+          size="small"
+          className="md:min-w-[48px] md:max-w-[98px]"
           onClick={() => setIsLogin(true)}
-          className={`flex-1 py-2 rounded ${isLogin ? "bg-blue-600 text-white" : "bg-gray-200"}`}
         >
-          Вход
-        </button>
-        <button
+          Login
+        </Button>
+        <Button
+          variant={isLogin ? "secondary" : "primary"}
+          size="small"
+          className="md:min-w-[48px] md:max-w-[98px]"
           onClick={() => setIsLogin(false)}
-          className={`flex-1 py-2 rounded ${!isLogin ? "bg-blue-600 text-white" : "bg-gray-200"}`}
         >
-          Регистрация
-        </button>
+          Register
+        </Button>
       </div>
 
       {isLogin ? (
