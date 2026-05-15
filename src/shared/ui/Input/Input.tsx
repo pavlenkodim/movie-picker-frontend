@@ -3,9 +3,20 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   before?: React.ReactNode;
   after?: React.ReactNode;
   hSize?: "small" | "medium" | "large";
+  error?: { isError: boolean; message?: string };
 }
 
-const Input = ({ label, before, after, hSize = "medium", className, ...props }: InputProps) => {
+const Input = ({
+  label,
+  before,
+  after,
+  hSize = "medium",
+  className,
+  error = { isError: false, message: "" },
+  ...props
+}: InputProps) => {
+  const { isError, message } = error;
+
   const sizeClasses = {
     input: {
       small: `text-sm py-1 px-3 ${before && "pl-7"} ${after && "pr-7"}`,
@@ -16,6 +27,11 @@ const Input = ({ label, before, after, hSize = "medium", className, ...props }: 
       small: "text-sm ml-3 mb-1 font-medium",
       medium: "text-base ml-4 mb-1 font-medium",
       large: "text-lg ml-5 mb-1 font-medium",
+    },
+    error: {
+      small: "text-sm ml-3 mt-1 min-h-[1.25rem]",
+      medium: "text-sm ml-4 mt-1 min-h-[1.25rem]",
+      large: "text-sm ml-5 mt-1 min-h-[1.25rem]",
     },
     icons: {
       before: {
@@ -43,7 +59,10 @@ const Input = ({ label, before, after, hSize = "medium", className, ...props }: 
           </span>
         )}
         <input
-          className={`w-full border rounded-full focus:outline-none focus:ring-2 focus:ring-white ${sizeClasses.input[hSize]} ${className}`}
+          className={`
+            w-full border rounded-full focus:outline-none focus:ring-2 
+            ${isError ? "focus:ring-red-500 border-red-500" : "focus:ring-white"} 
+            ${sizeClasses.input[hSize]} ${className}`}
           {...props}
         />
         {after && (
@@ -54,6 +73,7 @@ const Input = ({ label, before, after, hSize = "medium", className, ...props }: 
           </span>
         )}
       </div>
+      {isError && <p className={`text-red-600 ${sizeClasses.error[hSize]}`}>{message}</p>}
     </div>
   );
 };

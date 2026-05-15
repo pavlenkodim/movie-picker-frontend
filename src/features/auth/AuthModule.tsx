@@ -1,62 +1,46 @@
 "use client";
 
-import { useState } from "react";
-import { useLogin, useRegister } from "./hooks/auth";
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
 import Button from "@/shared/ui/Button/Button";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const AuthModule = () => {
-  const [isLogin, setIsLogin] = useState(true);
-  const loginMutation = useLogin();
-  const registerMutation = useRegister();
-
-  const handleLoginSubmit = (data: { email: string; password: string }) => {
-    loginMutation.mutate(data);
-  };
-
-  const handleRegisterSubmit = (data: {
-    name: string;
-    email: string;
-    password: string;
-    confirmPassword: string;
-  }) => {
-    const { confirmPassword, ...registerData } = data;
-    registerMutation.mutate(registerData);
-  };
+  const { push } = useRouter();
+  const searchParams = useSearchParams();
+  const currentTab = searchParams.get("tab");
 
   return (
     <div className="w-full h-full">
       <div className="flex justify-end gap-4 mb-5">
         <Button
-          variant={isLogin ? "primary" : "secondary"}
+          variant={currentTab === "login" ? "primary" : "secondary"}
           size="small"
           className="md:min-w-[48px] md:max-w-[98px]"
-          onClick={() => setIsLogin(true)}
+          onClick={() => push("?tab=login")}
         >
-          Login
+          Sign In
         </Button>
         <Button
-          variant={isLogin ? "secondary" : "primary"}
+          variant={currentTab === "register" ? "primary" : "secondary"}
           size="small"
           className="md:min-w-[48px] md:max-w-[98px]"
-          onClick={() => setIsLogin(false)}
+          onClick={() => push("?tab=register")}
         >
-          Register
+          Sign Up
         </Button>
       </div>
-
-      {isLogin ? (
-        <LoginForm
-        // onSubmit={handleLoginSubmit}
-        // isLoading={loginMutation.isPending}
-        // error={loginMutation.error?.message}
-        />
-      ) : (
+      {currentTab === "register" ? (
         <RegisterForm
         // onSubmit={handleRegisterSubmit}
         // isLoading={registerMutation.isPending}
         // error={registerMutation.error?.message}
+        />
+      ) : (
+        <LoginForm
+        // onSubmit={handleLoginSubmit}
+        // isLoading={loginMutation.isPending}
+        // error={loginMutation.error?.message}
         />
       )}
     </div>

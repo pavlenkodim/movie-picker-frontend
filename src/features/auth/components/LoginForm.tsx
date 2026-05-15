@@ -1,42 +1,92 @@
-import Button from "@/shared/ui/Button/Button";
-import Input from "@/shared/ui/Input/Input";
+"use client";
+import Button from "@/shared/ui/Button";
+import Input from "@/shared/ui/Input";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { LoginFormValues, loginSchema } from "../schemas/loginShema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useLogin } from "../hooks/useLogin";
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
+  const { mutate: login, isPending } = useLogin();
+
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors, isSubmitting },
+  } = useForm<LoginFormValues>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  const onSubmit = async (data: LoginFormValues) => {
+    login(data, {
+      onSuccess: () => {
+        router.push("/profile");
+      },
+      onError: (error) => {
+        setError("root", { message: error.message });
+      },
+    });
+  };
+
   return (
     <>
       <h1 className="text-center text-2xl font-bold">Login Form</h1>
-      <div className="flex flex-col gap-2 mb-4">
-        <Input label="Email" type="email" hSize="large" />
-        <Input
-          label="Password"
-          type={showPassword ? "text" : "password"}
-          hSize="large"
-          after={
-            <span className="cursor-pointer" onClick={() => setShowPassword(!showPassword)}>
-              {showPassword ? "Hide" : "Show"}
-            </span>
-          }
-        />
-      </div>
-      <div className="flex gap-4">
-        <Button variant="primary" className="w-full">
-          Enter
-        </Button>
-        <Link
-          href="/"
-          className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a]"
-        >
-          Cancel
-        </Link>
-      </div>
-      <div className="mt-4 text-center">
-        <Link href="auth/forgot-password" className="text-sm hover:underline">
-          Forgot Password?
-        </Link>
-      </div>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="flex flex-col gap-2 mb-4">
+          <Input
+            id="email"
+            label="Email"
+            type="email"
+            hSize="large"
+            error={{ isError: !!errors.email, message: errors.email?.message }}
+            {...register("email")}
+          />
+          <Input
+            id="password"
+            label="Password"
+            type={showPassword ? "text" : "password"}
+            hSize="large"
+            error={{ isError: !!errors.password, message: errors.password?.message }}
+            {...register("password")}
+            after={
+              <span className="cursor-pointer" onClick={() => setShowPassword(!showPassword)}>
+                {showPassword ? "Hide" : "Show"}
+              </span>
+            }
+          />
+        </div>
+        <div className="flex gap-4">
+          <Button
+            variant="primary"
+            className="w-full"
+            type="submit"
+            loading={isSubmitting && isPending}
+          >
+            Sign In
+          </Button>
+          <Link
+            href="/"
+            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a]"
+          >
+            Cancel
+          </Link>
+        </div>
+        <div className="mt-4 text-center">
+          <Link href="auth/forgot-password" className="text-sm hover:underline">
+            Forgot Password?
+          </Link>
+        </div>
+      </form>
     </>
   );
 };

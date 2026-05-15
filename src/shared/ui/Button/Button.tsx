@@ -19,7 +19,7 @@ const Button = ({
   const sizeClasses = {
     small: "h-8 px-5 text-sm",
     medium: "h-12 px-5 text-base",
-    large: "h-14 px-5 text-lg",
+    large: "h-14 px-5 text-lg font-bold",
   };
 
   const variantClasses = {
