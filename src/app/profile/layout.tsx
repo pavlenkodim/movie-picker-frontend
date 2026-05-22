@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/features/auth/lib/auth";
 import { redirect } from "next/navigation";
+import { options } from "../api/auth/[...nextauth]/options";
 
 export const metadata: Metadata = {
   title: "Profile Filmder",
@@ -13,7 +13,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await getServerSession(authOptions);
+  const session = await getServerSession(options);
 
   if (!session) redirect("/auth?tab=login");
 

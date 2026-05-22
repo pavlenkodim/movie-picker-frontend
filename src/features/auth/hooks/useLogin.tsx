@@ -7,13 +7,14 @@ export const useLogin = () => {
 
   return useMutation({
     mutationFn: async (data: LoginFormValues) => {
+      console.log("data form hook", data);
       const result = await signIn("credentials", {
         email: data.email,
         password: data.password,
         redirect: false,
       });
 
-      if (!result?.ok || result?.error) {
+      if (!result?.ok) {
         throw new Error(result?.error || "Invalid credentials");
       }
 
@@ -21,6 +22,9 @@ export const useLogin = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["session"] });
+    },
+    onError: (error: Error) => {
+      console.error("Login failed:", error);
     },
   });
 };

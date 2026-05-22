@@ -4,7 +4,7 @@ import "./globals.css";
 
 import Providers from "@/shared/providers";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/features/auth/lib/auth";
+import { options } from "./api/auth/[...nextauth]/options";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,7 +26,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await getServerSession(authOptions);
+  const session = await getServerSession(options);
 
   return (
     <html lang="en" suppressHydrationWarning data-lt-installed="true">

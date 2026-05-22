@@ -6,14 +6,16 @@ import CredentialsProvider from "next-auth/providers/credentials";
 export const options: NextAuthOptions = {
   providers: [
     CredentialsProvider({
-      name: "credentials",
+      id: "credentials",
+      name: "Credentials",
       credentials: {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
         try {
-          const res = await fetch(`${process.env.BACKEND_URL}/auth/login`, {
+          console.log("Attempting to log in with credentials:", credentials);
+          const res = await fetch(`${process.env.BACKEND_URL}/api/auth/login`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -22,11 +24,14 @@ export const options: NextAuthOptions = {
             }),
           });
 
+          console.log("Login response:", res);
+
           if (!res.ok) return null;
 
           const data = await res.json();
-          return { ...data.user, accessToken: data.access_token };
-        } catch {
+          return { ...data.user, token: data.token };
+        } catch (error) {
+          console.error("Authorization error:", error);
           return null;
         }
       },
@@ -43,58 +48,46 @@ export const options: NextAuthOptions = {
     // }),
   ],
 
-  session: { strategy: "jwt" },
+  session: {
+    strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60,
+  },
+
+  jwt: {
+    maxAge: 30 * 24 * 60 * 60,
+  },
 
   callbacks: {
-    async signIn({ user, account }) {
-      if (account?.provider !== "credentials") {
-        try {
-          const res = await fetch(`${process.env.BACKEND_URL}/auth/oauth`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              provider: account?.provider,
-              providerId: account?.providerAccountId,
-              email: user.email,
-              name: user.name,
-              avatar: user.image,
-            }),
-          });
-
-          if (!res.ok) return false;
-
-          const data = await res.json();
-          user.id = data.user.id;
-          user.role = data.user.role;
-          user.email = data.user.email;
-          user.name = data.user.name;
-        } catch (error) {
-          console.error("OAuth error:", error);
-          return false;
-        }
-      }
-
-      return true;
-    },
-
     async jwt({ token, user, account }) {
       if (user) {
-        token.id = user.id;
-        token.role = user.role;
+        token.id = user.id as number;
+        token.email = user.email;
+        token.banned = user.banned;
+        token.banReason = user.banReason;
+        token.roles = user.roles;
+        token.token = user.token;
         token.provider = account?.provider;
       }
       return token;
     },
 
     async session({ session, token }) {
-      session.user.id = token.id as string;
-      session.user.role = token.role as string;
+      session.user = {
+        id: token.id,
+        email: token.email,
+        banned: token.banned,
+        banReason: token.banReason,
+        roles: token.roles,
+      };
+      session.token = token.token;
       return session;
     },
   },
 
   pages: {
     signIn: "/auth?tab=login",
+    signOut: "/",
+    newUser: "/auth?tab=register",
     error: "/auth?tab=login&error=auth",
   },
 };

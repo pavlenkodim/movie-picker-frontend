@@ -1,4 +1,4 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3001/api";
+const API_URL = process.env.BACKEND_URL ?? "http://localhost:3001";
 
 type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 
@@ -41,7 +41,7 @@ export const apiClient = async <TResponse, TBody = undefined>(
     requestHeaders.Authorization = `Bearer ${accessToken}`;
   }
 
-  const url = `${API_URL}/${endpoint.replace(/^\//, "")}`;
+  const url = `${API_URL}/api/${endpoint.replace(/^\//, "")}`;
 
   const response = await fetch(url, {
     method,

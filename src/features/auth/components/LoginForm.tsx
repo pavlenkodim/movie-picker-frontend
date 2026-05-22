@@ -28,6 +28,7 @@ const LoginForm = () => {
   });
 
   const onSubmit = async (data: LoginFormValues) => {
+    console.log("data form form:", data);
     login(data, {
       onSuccess: () => {
         router.push("/profile");
@@ -69,7 +70,8 @@ const LoginForm = () => {
           <Button
             variant="primary"
             className="w-full"
-            type="submit"
+            type="button"
+            onClick={handleSubmit(onSubmit)}
             loading={isSubmitting && isPending}
           >
             Sign In
