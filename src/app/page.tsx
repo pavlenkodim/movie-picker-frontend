@@ -1,17 +1,31 @@
+import { getServerSession } from "next-auth";
 import Link from "next/link";
+import { options } from "./api/auth/[...nextauth]/options";
+import { User } from "lucide-react";
 
-export default function Home() {
+export default async function Home() {
+  const session = await getServerSession(options);
   return (
     <main className="w-full min-h-screen bg-white dark:bg-black text-black dark:text-white">
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-black/80 backdrop-blur-md border-b border-black/10 dark:border-white/10">
         <div className="max-w-md mx-auto px-6 py-4 flex items-center justify-between">
           <h1 className="text-2xl font-bold text-black dark:text-white">Filmder</h1>
-          <Link
-            href="/auth?tab=login"
-            className="text-sm font-semibold text-black dark:text-white hover:text-gray-600 dark:hover:text-gray-400 transition"
-          >
-            Sign In
-          </Link>
+          {session ? (
+            <Link
+              href="/profile"
+              className="text-sm flex gap-1 items-center font-semibold text-black dark:text-white hover:text-gray-600 dark:hover:text-gray-400 transition"
+            >
+              <User size={16} />
+              Profile
+            </Link>
+          ) : (
+            <Link
+              href="/auth?tab=login"
+              className="text-sm font-semibold text-black dark:text-white hover:text-gray-600 dark:hover:text-gray-400 transition"
+            >
+              Sign In / Sign Up
+            </Link>
+          )}
         </div>
       </nav>
 

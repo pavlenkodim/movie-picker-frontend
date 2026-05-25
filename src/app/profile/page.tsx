@@ -1,10 +1,7 @@
+import ProfileModule from "@/features/profile/ProfileModule";
+
 const ProfilePage = () => {
-  return (
-    <div>
-      <h1>Profile Page</h1>
-      <p>This is the profile page. You can view and edit your profile information here.</p>
-    </div>
-  );
+  return <ProfileModule />;
 };
 
 export default ProfilePage;

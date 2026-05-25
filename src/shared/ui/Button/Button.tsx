@@ -1,3 +1,5 @@
+import { LoaderCircle } from "lucide-react";
+
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   loading?: boolean;
   size?: "small" | "medium" | "large";
@@ -30,17 +32,29 @@ const Button = ({
     danger: "bg-red-600 text-white hover:bg-red-700",
   };
 
+  const stateClasses = {
+    disabled: "cursor-not-allowed opacity-50",
+    loading: "cursor-wait opacity-75",
+  };
+
   const sizeClass = size ? sizeClasses[size] : sizeClasses.medium;
   const variantClass = variant ? variantClasses[variant] : variantClasses.secondary;
 
   return (
     <button
       onClick={onClick}
-      className={`flex w-full items-center justify-center gap-2 rounded-full cursor-pointer ${sizeClass} ${variantClass} ${className}`}
+      className={`
+        flex items-center justify-center gap-2 rounded-full cursor-pointer 
+        ${sizeClass} 
+        ${variantClass} 
+        ${loading ? stateClasses.loading : ""}
+        ${disabled ? stateClasses.disabled : ""}
+        ${className}
+        `}
       disabled={disabled || loading}
       {...props}
     >
-      {loading ? "loading..." : icon}
+      {loading ? <LoaderCircle className="animate-spin" /> : icon}
       {children}
     </button>
   );

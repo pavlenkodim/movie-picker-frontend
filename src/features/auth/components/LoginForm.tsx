@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { LoginFormValues, loginSchema } from "../schemas/loginShema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useLogin } from "../hooks/useLogin";
+import { Eye, EyeClosed } from "lucide-react";
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -18,7 +19,7 @@ const LoginForm = () => {
     register,
     handleSubmit,
     setError,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -28,7 +29,6 @@ const LoginForm = () => {
   });
 
   const onSubmit = async (data: LoginFormValues) => {
-    console.log("data form form:", data);
     login(data, {
       onSuccess: () => {
         router.push("/profile");
@@ -61,19 +61,13 @@ const LoginForm = () => {
             {...register("password")}
             after={
               <span className="cursor-pointer" onClick={() => setShowPassword(!showPassword)}>
-                {showPassword ? "Hide" : "Show"}
+                {showPassword ? <Eye /> : <EyeClosed />}
               </span>
             }
           />
         </div>
         <div className="flex gap-4">
-          <Button
-            variant="primary"
-            className="w-full"
-            type="button"
-            onClick={handleSubmit(onSubmit)}
-            loading={isSubmitting && isPending}
-          >
+          <Button variant="primary" className="w-full" loading={isPending}>
             Sign In
           </Button>
           <Link

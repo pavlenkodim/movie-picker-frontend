@@ -2,9 +2,11 @@ import { useState } from "react";
 import Input from "@/shared/ui/Input/Input";
 import Button from "@/shared/ui/Button/Button";
 import Link from "next/link";
+import { Eye, EyeClosed } from "lucide-react";
 
 const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   return (
     <>
       <h1 className="text-center text-2xl font-bold">Register Form</h1>
@@ -16,17 +18,20 @@ const RegisterForm = () => {
           hSize="large"
           after={
             <span className="cursor-pointer" onClick={() => setShowPassword(!showPassword)}>
-              {showPassword ? "Hide" : "Show"}
+              {showPassword ? <Eye /> : <EyeClosed />}
             </span>
           }
         />
         <Input
           label="Confirm password"
-          type={showPassword ? "text" : "password"}
+          type={showConfirmPassword ? "text" : "password"}
           hSize="large"
           after={
-            <span className="cursor-pointer" onClick={() => setShowPassword(!showPassword)}>
-              {showPassword ? "Hide" : "Show"}
+            <span
+              className="cursor-pointer"
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            >
+              {showConfirmPassword ? <Eye /> : <EyeClosed />}
             </span>
           }
         />

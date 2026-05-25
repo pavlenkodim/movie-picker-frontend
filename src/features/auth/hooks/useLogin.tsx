@@ -7,7 +7,6 @@ export const useLogin = () => {
 
   return useMutation({
     mutationFn: async (data: LoginFormValues) => {
-      console.log("data form hook", data);
       const result = await signIn("credentials", {
         email: data.email,
         password: data.password,

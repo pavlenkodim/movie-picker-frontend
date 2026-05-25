@@ -14,7 +14,6 @@ export const options: NextAuthOptions = {
       },
       async authorize(credentials) {
         try {
-          console.log("Attempting to log in with credentials:", credentials);
           const res = await fetch(`${process.env.BACKEND_URL}/api/auth/login`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -23,8 +22,6 @@ export const options: NextAuthOptions = {
               password: credentials?.password,
             }),
           });
-
-          console.log("Login response:", res);
 
           if (!res.ok) return null;
 
