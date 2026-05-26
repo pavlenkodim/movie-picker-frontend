@@ -67,7 +67,7 @@ const LoginForm = () => {
           />
         </div>
         <div className="flex gap-4">
-          <Button variant="primary" className="w-full" loading={isPending}>
+          <Button variant="primary" type="submit" className="w-full" loading={isPending}>
             Sign In
           </Button>
           <Link
