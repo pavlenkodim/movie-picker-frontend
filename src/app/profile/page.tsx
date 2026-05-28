@@ -5,7 +5,10 @@ import Header from "@/shared/ui/Header";
 const ProfilePage = () => {
   return (
     <>
-      <Header right={<SignOutButton />}></Header>
+      <Header
+        right={<SignOutButton />}
+        center={<h1 className="text-2xl text-center font-bold">Profile</h1>}
+      ></Header>
       <ProfileModule />
     </>
   );
