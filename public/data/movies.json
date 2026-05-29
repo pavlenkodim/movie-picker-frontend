@@ -1,0 +1,202 @@
+[
+  {
+    "id": 1,
+    "title": "2001: A Space Odyssey",
+    "year": 1968,
+    "duration": 149,
+    "rating": 8.3,
+    "genres": ["Sci-Fi", "Adventure"],
+    "synopsis": "After discovering a mysterious artifact buried beneath the Lunar surface, mankind sets off on a quest to find its origins with help from intelligent supercomputer H.A.L. 9000.",
+    "posterUrl": "https://image.tmdb.org/t/p/w500/ve72VxNqjGM69Uky4WTo2bK6rfq.jpg",
+    "backdropUrl": "https://image.tmdb.org/t/p/original/rGnFNsOGgdkbOLLRfsCHHE1qjIe.jpg",
+    "director": "Stanley Kubrick",
+    "studio": "MGM",
+    "trailerUrl": "https://www.youtube.com/watch?v=oR_e9y-bka0",
+    "cast": [
+      { "id": 1, "name": "Keir Dullea", "photoUrl": null },
+      { "id": 2, "name": "Gary Lockwood", "photoUrl": null },
+      { "id": 3, "name": "William Sylvester", "photoUrl": null },
+      { "id": 4, "name": "Douglas Rain", "photoUrl": null }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Blade Runner 2049",
+    "year": 2017,
+    "duration": 164,
+    "rating": 8.0,
+    "genres": ["Sci-Fi", "Drama"],
+    "synopsis": "Young Blade Runner K's discovery of a long-buried secret leads him to track down former Blade Runner Rick Deckard, who's been missing for thirty years.",
+    "posterUrl": "https://image.tmdb.org/t/p/w500/gajva2L0rPYkEWjzgFlBXCAVBE5.jpg",
+    "backdropUrl": "https://image.tmdb.org/t/p/original/sEBLunxrHX2vNDhCcKFpLmj58zk.jpg",
+    "director": "Denis Villeneuve",
+    "studio": "Warner Bros.",
+    "trailerUrl": "https://www.youtube.com/watch?v=gCcx85zbxz4",
+    "cast": [
+      { "id": 5, "name": "Ryan Gosling", "photoUrl": null },
+      { "id": 6, "name": "Harrison Ford", "photoUrl": null },
+      { "id": 7, "name": "Ana de Armas", "photoUrl": null },
+      { "id": 8, "name": "Jared Leto", "photoUrl": null }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Interstellar",
+    "year": 2014,
+    "duration": 169,
+    "rating": 8.7,
+    "genres": ["Sci-Fi", "Drama"],
+    "synopsis": "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival as Earth faces an environmental collapse.",
+    "posterUrl": "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg",
+    "backdropUrl": "https://image.tmdb.org/t/p/original/xJHokMbljvjADYdit5fK5VQsXEG.jpg",
+    "director": "Christopher Nolan",
+    "studio": "Paramount Pictures",
+    "trailerUrl": "https://www.youtube.com/watch?v=zSWdZVtXT7E",
+    "cast": [
+      { "id": 9, "name": "Matthew McConaughey", "photoUrl": null },
+      { "id": 10, "name": "Anne Hathaway", "photoUrl": null },
+      { "id": 11, "name": "Jessica Chastain", "photoUrl": null },
+      { "id": 12, "name": "Michael Caine", "photoUrl": null }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "The Godfather",
+    "year": 1972,
+    "duration": 175,
+    "rating": 9.2,
+    "genres": ["Crime", "Drama"],
+    "synopsis": "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
+    "posterUrl": "https://image.tmdb.org/t/p/w500/3bhkrj58Vtu7enYsLLeWorktA0o.jpg",
+    "backdropUrl": "https://image.tmdb.org/t/p/original/tmU7GeKVybMWFbGe6jf1YgBLMF.jpg",
+    "director": "Francis Ford Coppola",
+    "studio": "Paramount Pictures",
+    "trailerUrl": "https://www.youtube.com/watch?v=sY1S34973zA",
+    "cast": [
+      { "id": 13, "name": "Marlon Brando", "photoUrl": null },
+      { "id": 14, "name": "Al Pacino", "photoUrl": null },
+      { "id": 15, "name": "James Caan", "photoUrl": null },
+      { "id": 16, "name": "Robert Duvall", "photoUrl": null }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Parasite",
+    "year": 2019,
+    "duration": 132,
+    "rating": 8.5,
+    "genres": ["Thriller", "Drama"],
+    "synopsis": "Greed and class discrimination threaten the newly formed symbiotic relationship between the wealthy Park family and the destitute Kim clan.",
+    "posterUrl": "https://image.tmdb.org/t/p/w500/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg",
+    "backdropUrl": "https://image.tmdb.org/t/p/original/ApiBzeaa95TNYLiLDswd7PzbqtZ.jpg",
+    "director": "Bong Joon-ho",
+    "studio": "CJ Entertainment",
+    "trailerUrl": "https://www.youtube.com/watch?v=5xH0HfJHsaY",
+    "cast": [
+      { "id": 17, "name": "Song Kang-ho", "photoUrl": null },
+      { "id": 18, "name": "Lee Sun-kyun", "photoUrl": null },
+      { "id": 19, "name": "Cho Yeo-jeong", "photoUrl": null },
+      { "id": 20, "name": "Choi Woo-shik", "photoUrl": null }
+    ]
+  },
+  {
+    "id": 6,
+    "title": "The Dark Knight",
+    "year": 2008,
+    "duration": 152,
+    "rating": 9.0,
+    "genres": ["Action", "Crime", "Drama"],
+    "synopsis": "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
+    "posterUrl": "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
+    "backdropUrl": "https://image.tmdb.org/t/p/original/hkBaDkMWbLaf8B1lsWsKX7Ew3Xq.jpg",
+    "director": "Christopher Nolan",
+    "studio": "Warner Bros.",
+    "trailerUrl": "https://www.youtube.com/watch?v=EXeTwQWrcwY",
+    "cast": [
+      { "id": 21, "name": "Christian Bale", "photoUrl": null },
+      { "id": 22, "name": "Heath Ledger", "photoUrl": null },
+      { "id": 23, "name": "Aaron Eckhart", "photoUrl": null },
+      { "id": 24, "name": "Maggie Gyllenhaal", "photoUrl": null }
+    ]
+  },
+  {
+    "id": 7,
+    "title": "Spirited Away",
+    "year": 2001,
+    "duration": 125,
+    "rating": 8.6,
+    "genres": ["Animation", "Fantasy", "Adventure"],
+    "synopsis": "During her family's move to the suburbs, a sullen 10-year-old girl wanders into a world ruled by gods, witches, and spirits, where humans are changed into beasts.",
+    "posterUrl": "https://image.tmdb.org/t/p/w500/39wmItIWsg5sZMyRUHLkWBcuVCM.jpg",
+    "backdropUrl": "https://image.tmdb.org/t/p/original/bSXfU4dwZyBA1vMmXvejdRXBvuF.jpg",
+    "director": "Hayao Miyazaki",
+    "studio": "Studio Ghibli",
+    "trailerUrl": "https://www.youtube.com/watch?v=ByXuk9QqQkk",
+    "cast": [
+      { "id": 25, "name": "Daveigh Chase", "photoUrl": null },
+      { "id": 26, "name": "Suzanne Pleshette", "photoUrl": null },
+      { "id": 27, "name": "Miyu Irino", "photoUrl": null },
+      { "id": 28, "name": "Rumi Hiiragi", "photoUrl": null }
+    ]
+  },
+  {
+    "id": 8,
+    "title": "Pulp Fiction",
+    "year": 1994,
+    "duration": 154,
+    "rating": 8.9,
+    "genres": ["Crime", "Drama"],
+    "synopsis": "The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.",
+    "posterUrl": "https://image.tmdb.org/t/p/w500/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg",
+    "backdropUrl": "https://image.tmdb.org/t/p/original/suaEOtk1N1sgg2MTM7oZd2cfVp3.jpg",
+    "director": "Quentin Tarantino",
+    "studio": "Miramax",
+    "trailerUrl": "https://www.youtube.com/watch?v=s7EdQ4FqbhY",
+    "cast": [
+      { "id": 29, "name": "John Travolta", "photoUrl": null },
+      { "id": 30, "name": "Uma Thurman", "photoUrl": null },
+      { "id": 31, "name": "Samuel L. Jackson", "photoUrl": null },
+      { "id": 32, "name": "Bruce Willis", "photoUrl": null }
+    ]
+  },
+  {
+    "id": 9,
+    "title": "Inception",
+    "year": 2010,
+    "duration": 148,
+    "rating": 8.8,
+    "genres": ["Sci-Fi", "Action", "Thriller"],
+    "synopsis": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.",
+    "posterUrl": "https://image.tmdb.org/t/p/w500/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg",
+    "backdropUrl": "https://image.tmdb.org/t/p/original/s2bT29y0ngXxxu2IA8AOzzXTRhd.jpg",
+    "director": "Christopher Nolan",
+    "studio": "Warner Bros.",
+    "trailerUrl": "https://www.youtube.com/watch?v=YoHD9XEInc0",
+    "cast": [
+      { "id": 33, "name": "Leonardo DiCaprio", "photoUrl": null },
+      { "id": 34, "name": "Joseph Gordon-Levitt", "photoUrl": null },
+      { "id": 35, "name": "Elliot Page", "photoUrl": null },
+      { "id": 36, "name": "Tom Hardy", "photoUrl": null }
+    ]
+  },
+  {
+    "id": 10,
+    "title": "The Shawshank Redemption",
+    "year": 1994,
+    "duration": 142,
+    "rating": 9.3,
+    "genres": ["Drama"],
+    "synopsis": "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
+    "posterUrl": "https://image.tmdb.org/t/p/w500/lyQBXzOQSuE59IsHyhrp0qIiPAz.jpg",
+    "backdropUrl": "https://image.tmdb.org/t/p/original/kXfqcdQKsToO0OUXHcrrNCHDBzO.jpg",
+    "director": "Frank Darabont",
+    "studio": "Columbia Pictures",
+    "trailerUrl": "https://www.youtube.com/watch?v=6hB3S9bIaco",
+    "cast": [
+      { "id": 37, "name": "Tim Robbins", "photoUrl": null },
+      { "id": 38, "name": "Morgan Freeman", "photoUrl": null },
+      { "id": 39, "name": "Bob Gunton", "photoUrl": null },
+      { "id": 40, "name": "William Sadler", "photoUrl": null }
+    ]
+  }
+]

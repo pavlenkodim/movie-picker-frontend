@@ -3,7 +3,7 @@ const ProfileThumbnail = ({ url, badge }: { url?: string; badge?: React.ReactNod
     <div className="flex gap-4 flex-col items-center">
       <div className="relative">
         <div
-          className="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-32 w-32 ring-4 ring-primary"
+          className="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-32 w-32"
           data-alt="Monochrome portrait of a smiling young person"
           style={{ backgroundImage: `url(${url})` }}
         ></div>

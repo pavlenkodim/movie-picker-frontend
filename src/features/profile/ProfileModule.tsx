@@ -25,7 +25,6 @@ const ProfileModule = () => {
     enabled: !!userId,
   });
 
-  console.log("profile", data);
   return (
     <div className="flex w-full flex-col gap-6 items-center p-4">
       <ProfileThumbnail

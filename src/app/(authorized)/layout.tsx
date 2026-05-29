@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { options } from "../api/auth/[...nextauth]/options";
+import NavbarModule from "@/features/navbar/NavbarModule";
 
 export const metadata: Metadata = {
   title: "Profile Filmder",
@@ -17,5 +18,10 @@ export default async function RootLayout({
 
   if (!session) redirect("/auth?tab=login");
 
-  return <>{children}</>;
+  return (
+    <>
+      {children}
+      <NavbarModule />
+    </>
+  );
 }

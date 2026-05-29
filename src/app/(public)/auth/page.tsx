@@ -1,6 +1,6 @@
 import AuthModule from "@/features/auth/AuthModule";
 import { getServerSession } from "next-auth";
-import { options } from "../api/auth/[...nextauth]/options";
+import { options } from "../../api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
 
 const AuthPage = async () => {

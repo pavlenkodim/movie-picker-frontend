@@ -55,8 +55,6 @@ export const apiClient = async <TResponse, TBody = undefined>(
     requestHeaders.Authorization = `Bearer ${accessToken}`;
   }
 
-  console.log("backend url", process.env.BACKEND_URL);
-
   const url = `${API_URL}/api/${endpoint.replace(/^\//, "")}`;
 
   const response = await fetch(url, {
