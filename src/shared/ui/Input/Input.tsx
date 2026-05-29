@@ -1,3 +1,5 @@
+import { cn } from "@/shared/libs/utils";
+
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   before?: React.ReactNode;
@@ -59,10 +61,12 @@ const Input = ({
           </span>
         )}
         <input
-          className={`
-            w-full border rounded-full focus:outline-none focus:ring-2 
-            ${isError ? "focus:ring-red-500 border-red-500" : "focus:ring-white"} 
-            ${sizeClasses.input[hSize]} ${className}`}
+          className={cn(
+            "w-full border rounded-full focus:outline-none focus:ring-2",
+            isError ? "focus:ring-red-500 border-red-500" : "focus:ring-foreground",
+            sizeClasses.input[hSize],
+            className,
+          )}
           {...props}
         />
         {after && (

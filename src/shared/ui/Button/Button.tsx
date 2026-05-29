@@ -1,3 +1,4 @@
+import { cn } from "@/shared/libs/utils";
 import { LoaderCircle } from "lucide-react";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -45,7 +46,14 @@ const Button = ({
   return (
     <button
       onClick={onClick}
-      className={`flex items-center justify-center gap-2 rounded-full cursor-pointer ${sizeClass} ${variantClass} ${loading ? stateClasses.loading : ""} ${disabled ? stateClasses.disabled : ""} ${className}`}
+      className={cn(
+        "flex items-center justify-center gap-2 rounded-full cursor-pointer",
+        sizeClass,
+        variantClass,
+        loading && stateClasses.loading,
+        disabled && stateClasses.disabled,
+        className,
+      )}
       disabled={disabled || loading}
       {...props}
     >
