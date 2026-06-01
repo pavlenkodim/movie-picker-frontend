@@ -12,7 +12,7 @@
     "director": "Stanley Kubrick",
     "studio": "MGM",
     "trailerUrl": "https://www.youtube.com/watch?v=oR_e9y-bka0",
-    "cast": [
+    "actors": [
       { "id": 1, "name": "Keir Dullea", "photoUrl": null },
       { "id": 2, "name": "Gary Lockwood", "photoUrl": null },
       { "id": 3, "name": "William Sylvester", "photoUrl": null },
@@ -32,7 +32,7 @@
     "director": "Denis Villeneuve",
     "studio": "Warner Bros.",
     "trailerUrl": "https://www.youtube.com/watch?v=gCcx85zbxz4",
-    "cast": [
+    "actors": [
       { "id": 5, "name": "Ryan Gosling", "photoUrl": null },
       { "id": 6, "name": "Harrison Ford", "photoUrl": null },
       { "id": 7, "name": "Ana de Armas", "photoUrl": null },
@@ -52,7 +52,7 @@
     "director": "Christopher Nolan",
     "studio": "Paramount Pictures",
     "trailerUrl": "https://www.youtube.com/watch?v=zSWdZVtXT7E",
-    "cast": [
+    "actors": [
       { "id": 9, "name": "Matthew McConaughey", "photoUrl": null },
       { "id": 10, "name": "Anne Hathaway", "photoUrl": null },
       { "id": 11, "name": "Jessica Chastain", "photoUrl": null },
@@ -72,7 +72,7 @@
     "director": "Francis Ford Coppola",
     "studio": "Paramount Pictures",
     "trailerUrl": "https://www.youtube.com/watch?v=sY1S34973zA",
-    "cast": [
+    "actors": [
       { "id": 13, "name": "Marlon Brando", "photoUrl": null },
       { "id": 14, "name": "Al Pacino", "photoUrl": null },
       { "id": 15, "name": "James Caan", "photoUrl": null },
@@ -92,7 +92,7 @@
     "director": "Bong Joon-ho",
     "studio": "CJ Entertainment",
     "trailerUrl": "https://www.youtube.com/watch?v=5xH0HfJHsaY",
-    "cast": [
+    "actors": [
       { "id": 17, "name": "Song Kang-ho", "photoUrl": null },
       { "id": 18, "name": "Lee Sun-kyun", "photoUrl": null },
       { "id": 19, "name": "Cho Yeo-jeong", "photoUrl": null },
@@ -112,7 +112,7 @@
     "director": "Christopher Nolan",
     "studio": "Warner Bros.",
     "trailerUrl": "https://www.youtube.com/watch?v=EXeTwQWrcwY",
-    "cast": [
+    "actors": [
       { "id": 21, "name": "Christian Bale", "photoUrl": null },
       { "id": 22, "name": "Heath Ledger", "photoUrl": null },
       { "id": 23, "name": "Aaron Eckhart", "photoUrl": null },
@@ -132,7 +132,7 @@
     "director": "Hayao Miyazaki",
     "studio": "Studio Ghibli",
     "trailerUrl": "https://www.youtube.com/watch?v=ByXuk9QqQkk",
-    "cast": [
+    "actors": [
       { "id": 25, "name": "Daveigh Chase", "photoUrl": null },
       { "id": 26, "name": "Suzanne Pleshette", "photoUrl": null },
       { "id": 27, "name": "Miyu Irino", "photoUrl": null },
@@ -152,7 +152,7 @@
     "director": "Quentin Tarantino",
     "studio": "Miramax",
     "trailerUrl": "https://www.youtube.com/watch?v=s7EdQ4FqbhY",
-    "cast": [
+    "actors": [
       { "id": 29, "name": "John Travolta", "photoUrl": null },
       { "id": 30, "name": "Uma Thurman", "photoUrl": null },
       { "id": 31, "name": "Samuel L. Jackson", "photoUrl": null },
@@ -172,7 +172,7 @@
     "director": "Christopher Nolan",
     "studio": "Warner Bros.",
     "trailerUrl": "https://www.youtube.com/watch?v=YoHD9XEInc0",
-    "cast": [
+    "actors": [
       { "id": 33, "name": "Leonardo DiCaprio", "photoUrl": null },
       { "id": 34, "name": "Joseph Gordon-Levitt", "photoUrl": null },
       { "id": 35, "name": "Elliot Page", "photoUrl": null },
@@ -192,7 +192,7 @@
     "director": "Frank Darabont",
     "studio": "Columbia Pictures",
     "trailerUrl": "https://www.youtube.com/watch?v=6hB3S9bIaco",
-    "cast": [
+    "actors": [
       { "id": 37, "name": "Tim Robbins", "photoUrl": null },
       { "id": 38, "name": "Morgan Freeman", "photoUrl": null },
       { "id": 39, "name": "Bob Gunton", "photoUrl": null },

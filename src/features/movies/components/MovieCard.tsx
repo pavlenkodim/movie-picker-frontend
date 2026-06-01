@@ -5,9 +5,10 @@ import { Movie } from "../types";
 import Picture from "@/shared/ui/Picture";
 import { Heart, Star, X } from "lucide-react";
 import GlassArea from "@/shared/ui/GlassArea";
-import useMovieStore from "../store/movieStore";
 import Button from "@/shared/ui/Button";
 import { useState } from "react";
+import Link from "next/link";
+import MovieInfo from "./MovieInfo";
 
 interface MovieCardProps {
   movie: Movie;
@@ -19,7 +20,7 @@ interface MovieCardProps {
 
 const SWIPE_THRESHOLD = 100;
 
-export const MovieCard = ({ movie, onSwipe, onOpenInfo, onCloseInfo, isTop }: MovieCardProps) => {
+export const MovieCard = ({ movie, onSwipe, isTop }: MovieCardProps) => {
   const [isInfoOpen, setIsInfoOpen] = useState<boolean>(false);
   // const { isInfoOpen } = useMovieStore();
   const controls = useAnimation();
@@ -77,8 +78,6 @@ export const MovieCard = ({ movie, onSwipe, onOpenInfo, onCloseInfo, isTop }: Mo
     });
   };
 
-  console.log("isInfoOpen", isInfoOpen);
-
   return (
     <motion.div
       className="absolute inset-0 cursor-grab active:cursor-grabbing"
@@ -118,7 +117,7 @@ export const MovieCard = ({ movie, onSwipe, onOpenInfo, onCloseInfo, isTop }: Mo
 
         <div className="w-full p-3 flex justify-between z-10">
           <Button
-            className="bg-white/60 hover:bg-white/80 dark:text-black dark:hover:bg-white/80 p-3"
+            className="bg-white/60 hover:bg-white/80 backdrop-blur-sm dark:text-black dark:hover:bg-white/80 p-3"
             variant="secondary"
             onClick={async () => await flyOut("dislike")}
           >
@@ -126,42 +125,14 @@ export const MovieCard = ({ movie, onSwipe, onOpenInfo, onCloseInfo, isTop }: Mo
           </Button>
 
           <Button
-            className="bg-white/60 hover:bg-white/80 dark:text-black dark:hover:bg-white/80 p-3"
+            className="bg-white/60 hover:bg-white/80 backdrop-blur-sm dark:text-black dark:hover:bg-white/80 p-3"
             variant="secondary"
             onClick={async () => await flyOut("like")}
           >
             <Heart size={32} />
           </Button>
         </div>
-
-        <GlassArea
-          className={`w-full p-6 border-b-0 rounded-3xl z-10 ${isInfoOpen ? "" : "bg-transparent backdrop-blur-none"}`}
-        >
-          <div className="flex justify-center -mt-4">
-            <div
-              className="w-8 px-8 py-1 mb-1 dark:bg-white/20 bg-black/20 backdrop-blur-md rounded-full cursor-pointer"
-              onClick={() => setIsInfoOpen(!isInfoOpen)}
-            ></div>
-          </div>
-
-          <div className="flex items-end justify-between">
-            <div>
-              <h2 className="text-2xl font-bold">{movie.title}</h2>
-              <p className="text-sm mt-1">
-                {movie.year} · {movie.genres[0]} · {Math.floor(movie.duration / 60)}h{" "}
-                {movie.duration % 60}m
-              </p>
-            </div>
-            <div className="bg-black/20 dark:bg-white/20 backdrop-blur-sm rounded-full px-3 py-1 flex items-center gap-1">
-              <span className="text-yellow-400 text-sm">
-                <Star size={16} />
-              </span>
-              <span className="text-white text-sm font-medium">{movie.rating}</span>
-            </div>
-          </div>
-
-          <div className="flex flex-col">{/* {movie.} */}</div>
-        </GlassArea>
+        <MovieInfo movie={movie} isOpen={isInfoOpen} onToggle={() => setIsInfoOpen(!isInfoOpen)} />
       </div>
     </motion.div>
   );

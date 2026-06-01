@@ -3,9 +3,9 @@ import { LoaderCircle } from "lucide-react";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   loading?: boolean;
-  size?: "small" | "medium" | "large" | "empty";
+  size?: "small" | "medium" | "large";
   icon?: React.ReactNode;
-  variant?: "primary" | "secondary" | "danger" | "empty";
+  variant?: "primary" | "secondary" | "danger" | "link";
 }
 
 const Button = ({
@@ -20,38 +20,33 @@ const Button = ({
   ...props
 }: ButtonProps) => {
   const sizeClasses = {
-    empty: "",
     small: "h-8 px-3 text-sm",
     medium: "h-12 px-5 text-base",
     large: "h-14 px-5 text-lg font-bold",
   };
 
   const variantClasses = {
-    primary:
-      "bg-foreground text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc]",
-    secondary:
-      "border border-solid border-black/[.08] transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a]",
-    danger: "bg-red-600 text-white hover:bg-red-700",
-    empty: "",
+    primary: "bg-foreground text-background hover:bg-foreground/90",
+    secondary: "border border-solid border-foreground/20 hover:bg-foreground/10",
+    danger: "bg-red-600 text-white hover:bg-red-600/90",
+    link: "",
   };
 
   const stateClasses = {
-    disabled: "cursor-not-allowed opacity-50",
     loading: "cursor-wait opacity-75",
   };
 
-  const sizeClass = size ? sizeClasses[size] : sizeClasses.empty;
-  const variantClass = variant ? variantClasses[variant] : variantClasses.empty;
+  const sizeClass = size && sizeClasses[size];
+  const variantClass = variant && variantClasses[variant];
 
   return (
     <button
       onClick={onClick}
       className={cn(
-        "flex items-center justify-center gap-2 rounded-full cursor-pointer",
+        "flex items-center justify-center gap-2 rounded-full cursor-pointer backdrop-blur-sm transition-colors leading-none disabled:cursor-not-allowed disabled:opacity-50",
         sizeClass,
         variantClass,
         loading && stateClasses.loading,
-        disabled && stateClasses.disabled,
         className,
       )}
       disabled={disabled || loading}

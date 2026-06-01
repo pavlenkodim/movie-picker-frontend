@@ -10,13 +10,20 @@ export interface Movie {
   synopsis: string;
   posterUrl: string;
   backdropUrl?: string;
-  cast: CastMember[];
+  // cast?: CastMember[];
+  actors?: Actor[];
   director: string;
   studio: string;
   trailerUrl?: string;
 }
 
 export interface CastMember {
+  id: number;
+  name: string;
+  photoUrl?: string;
+}
+
+export interface Actor {
   id: number;
   name: string;
   photoUrl?: string;

@@ -31,7 +31,7 @@ const LoginForm = () => {
   const onSubmit = async (data: LoginFormValues) => {
     login(data, {
       onSuccess: () => {
-        router.push("/profile");
+        router.push("/movies");
       },
       onError: (error) => {
         setError("root", { message: error.message });
