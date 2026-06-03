@@ -5,11 +5,11 @@ import { options } from "../api/auth/[...nextauth]/options";
 import NavbarModule from "@/features/navbar/NavbarModule";
 
 export const metadata: Metadata = {
-  title: "Profile Filmder",
+  title: "Filmder",
   description: "Like Tinder, but for movies.",
 };
 
-export default async function RootLayout({
+export default async function AuthorizedLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -19,9 +19,11 @@ export default async function RootLayout({
   if (!session) redirect("/auth?tab=login");
 
   return (
-    <>
-      {children}
-      <NavbarModule />
-    </>
+    <div className="max-w-3xl mx-auto h-full">
+      <main className="h-full">
+        {children}
+        <NavbarModule />
+      </main>
+    </div>
   );
 }

@@ -80,14 +80,14 @@ export const MovieCard = ({ movie, onSwipe, isTop }: MovieCardProps) => {
 
   return (
     <motion.div
-      className="absolute inset-0 cursor-grab active:cursor-grabbing"
+      className="absolute inset-0 cursor-grab active:cursor-grabbing px-4 md:px-0"
       style={{ x, y, rotate }}
       animate={controls}
       drag={isTop ? "x" : false}
       dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
       dragElastic={0.7}
       onDragEnd={handleDragEnd}
-      whileTap={{ scale: 1.02 }}
+      // whileTap={{ scale: 1.02 }}
     >
       <div className="relative w-full h-full rounded-3xl overflow-hidden flex flex-col justify-end">
         <Picture

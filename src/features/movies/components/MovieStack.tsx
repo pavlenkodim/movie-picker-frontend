@@ -13,20 +13,16 @@ export const MovieStack = () => {
 
   const visibleMovies = activeMovies.slice(currentIndex, currentIndex + STACK_SIZE);
 
-  if (isLoading && activeMovies.length === 0) {
-    return <MovieSkeleton />;
-  }
-
   if (visibleMovies.length === 0) {
     return (
       <div className="flex items-center justify-center h-full">
-        <p className="text-white/50 text-lg">Фильмы закончились</p>
+        <p className="text-white/50 text-lg">The movies are over</p>
       </div>
     );
   }
 
   return (
-    <div className="relative w-full h-full">
+    <div className="relative w-full h-full px-4 md:px-0">
       <AnimatePresence>
         {visibleMovies.map((movie, index) => {
           const isTop = index === 0;
@@ -64,12 +60,3 @@ export const MovieStack = () => {
     </div>
   );
 };
-
-const MovieSkeleton = () => (
-  <div className="absolute inset-0 rounded-3xl overflow-hidden bg-white/10 animate-pulse">
-    <div className="absolute bottom-0 left-0 right-0 p-6 space-y-2">
-      <div className="h-6 w-48 bg-white/20 rounded-lg" />
-      <div className="h-4 w-32 bg-white/10 rounded-lg" />
-    </div>
-  </div>
-);

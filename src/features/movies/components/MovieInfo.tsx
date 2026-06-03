@@ -3,6 +3,7 @@ import { Movie } from "../types";
 import { ExternalLink, Star } from "lucide-react";
 import Link from "next/link";
 import Picture from "@/shared/ui/Picture";
+import { cn } from "@/shared/libs/utils";
 
 interface MovieInfoProps {
   movie: Movie;
@@ -13,11 +14,17 @@ interface MovieInfoProps {
 const MovieInfo = ({ movie, isOpen, onToggle }: MovieInfoProps) => {
   return (
     <GlassArea
-      className={`w-full overflow-y-auto p-6 border-b-0 rounded-3xl z-20 ${isOpen ? "" : "bg-transparent backdrop-blur-none"}`}
+      className={cn(
+        "w-full overflow-y-auto p-6 pb-8 border-b-0 rounded-3xl z-20 transition-all duration-300",
+        !isOpen && "bg-transparent backdrop-blur-none",
+      )}
     >
       <div className="flex justify-center -mt-4">
         <div
-          className="w-8 px-8 py-1 mb-1 dark:bg-white/20 bg-black/20 backdrop-blur-md rounded-full cursor-pointer"
+          className={cn(
+            "w-8 px-8 py-1 mb-1 dark:bg-white/20 bg-black/20 backdrop-blur-md rounded-full cursor-pointer",
+            isOpen && "bg-white/30",
+          )}
           onClick={onToggle}
         ></div>
       </div>

@@ -6,8 +6,13 @@ import { signOut } from "next-auth/react";
 
 const SignOutButton = () => {
   return (
-    <Button onClick={() => signOut({ callbackUrl: "/" })}>
-      <LogOut />
+    <Button
+      variant="danger"
+      size="large"
+      className="w-full max-w-[448px]"
+      onClick={() => signOut({ callbackUrl: "/" })}
+    >
+      <LogOut /> Log out
     </Button>
   );
 };

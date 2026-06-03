@@ -30,14 +30,8 @@ export default async function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning data-lt-installed="true">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Providers session={session}>
-          <div className="flex min-h-screen items-center justify-center font-sans">
-            <main className="flex min-h-screen w-full max-w-3xl flex-col items-center py-8 pt-18 md:py-32 px-4 md:px-16 sm:items-start">
-              {children}
-            </main>
-          </div>
-        </Providers>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased h-[95vh]`}>
+        <Providers session={session}>{children}</Providers>
       </body>
     </html>
   );

@@ -16,7 +16,7 @@ const NavbarModule = () => {
   const pathname = usePathname();
 
   return (
-    <GlassArea className="fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] max-w-[448px] h-16 rounded-full flex items-center justify-around px-4 z-50 shadow-2xl">
+    <GlassArea className="fixed bottom-2 left-1/2 -translate-x-1/2 w-[90%] max-w-[448px] h-16 rounded-full flex items-center justify-around px-4 z-50 shadow-2xl">
       {links.map(({ href, icon: Icon }) => {
         const isActive = pathname === href;
         return (
