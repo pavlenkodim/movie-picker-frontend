@@ -4,10 +4,8 @@ import { motion, PanInfo, useAnimation, useMotionValue, useTransform } from "fra
 import { Movie } from "../types";
 import Picture from "@/shared/ui/Picture";
 import { Heart, Star, X } from "lucide-react";
-import GlassArea from "@/shared/ui/GlassArea";
 import Button from "@/shared/ui/Button";
 import { useState } from "react";
-import Link from "next/link";
 import MovieInfo from "./MovieInfo";
 
 interface MovieCardProps {
@@ -80,7 +78,7 @@ export const MovieCard = ({ movie, onSwipe, isTop }: MovieCardProps) => {
 
   return (
     <motion.div
-      className="absolute inset-0 cursor-grab active:cursor-grabbing px-4 md:px-0"
+      className="absolute inset-0 cursor-grab active:cursor-grabbing px-4 md:px-32"
       style={{ x, y, rotate }}
       animate={controls}
       drag={isTop ? "x" : false}
@@ -114,25 +112,13 @@ export const MovieCard = ({ movie, onSwipe, isTop }: MovieCardProps) => {
         >
           <X size={81} strokeWidth={2} />
         </motion.div>
-
-        <div className="w-full p-3 flex justify-between z-10">
-          <Button
-            className="bg-white/60 hover:bg-white/80 backdrop-blur-sm dark:text-black dark:hover:bg-white/80 p-3"
-            variant="secondary"
-            onClick={async () => await flyOut("dislike")}
-          >
-            <X size={32} />
-          </Button>
-
-          <Button
-            className="bg-white/60 hover:bg-white/80 backdrop-blur-sm dark:text-black dark:hover:bg-white/80 p-3"
-            variant="secondary"
-            onClick={async () => await flyOut("like")}
-          >
-            <Heart size={32} />
-          </Button>
-        </div>
-        <MovieInfo movie={movie} isOpen={isInfoOpen} onToggle={() => setIsInfoOpen(!isInfoOpen)} />
+        <MovieInfo
+          movie={movie}
+          isOpen={isInfoOpen}
+          onToggle={() => setIsInfoOpen(!isInfoOpen)}
+          onDislike={async () => await flyOut("dislike")}
+          onLike={async () => await flyOut("like")}
+        />
       </div>
     </motion.div>
   );
