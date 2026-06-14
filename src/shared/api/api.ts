@@ -4,7 +4,7 @@ type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 
 type RequestOptions<TBody> = {
   method?: HttpMethod;
-  body?: TBody;
+  body?: TBody | FormData;
   headers?: Record<string, string>;
 };
 
@@ -43,11 +43,12 @@ export const apiClient = async <TResponse, TBody = undefined>(
   options: RequestOptions<TBody> = {},
 ): Promise<TResponse> => {
   const { method = "GET", body, headers = {} } = options;
-
   const accessToken = await getAccessToken();
 
+  const isFormData = body instanceof FormData;
+
   const requestHeaders: Record<string, string> = {
-    "Content-Type": "application/json",
+    ...(!isFormData && { "Content-Type": "application/json" }),
     ...headers,
   };
 
@@ -60,7 +61,7 @@ export const apiClient = async <TResponse, TBody = undefined>(
   const response = await fetch(url, {
     method,
     headers: requestHeaders,
-    body: body !== undefined ? JSON.stringify(body) : undefined,
+    body: isFormData ? body : body !== undefined ? JSON.stringify(body) : undefined,
   });
 
   if (response.status === 401) {
