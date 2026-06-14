@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { LoginFormValues, loginSchema } from "../schemas/loginShema";
+import { LoginFormValues, loginSchema } from "../schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useLogin } from "../hooks/useLogin";
 import { Eye, EyeClosed } from "lucide-react";

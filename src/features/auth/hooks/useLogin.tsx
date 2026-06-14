@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { signIn } from "next-auth/react";
-import { LoginFormValues } from "../schemas/loginShema";
+import { LoginFormValues } from "../schemas";
 
 export const useLogin = () => {
   const queryClient = useQueryClient();
