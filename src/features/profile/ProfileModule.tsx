@@ -6,6 +6,9 @@ import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import { apiClient } from "@/shared/api/api";
 import SignOutButton from "../auth/components/SignOutButton";
+import { useEffect } from "react";
+import { ApiError } from "@/shared/api/api";
+import { useRouter } from "next/navigation";
 
 interface Profile {
   id: number;
@@ -19,23 +22,29 @@ interface Profile {
 const ProfileModule = () => {
   const session = useSession();
   const userId = session.data?.user.id;
+  const router = useRouter();
 
-  const { data } = useQuery({
+  const { data, isPending, error } = useQuery({
     queryKey: ["profile", userId],
     queryFn: () => apiClient<Profile>(`profiles/${userId}`),
+    retry: 2,
     enabled: !!userId,
   });
+
+  useEffect(() => {
+    if (error instanceof ApiError && error.status === 404) {
+      router.push("profile/create");
+    }
+  }, [error, router]);
+
+  console.log("profile", data);
+  console.log("error", error?.message);
 
   return (
     <div className="flex w-full h-full flex-col justify-between gap-6 items-center p-4">
       <div>
-        <ProfileThumbnail
-          url={
-            data?.thumbnail ??
-            "https://lh3.googleusercontent.com/aida-public/AB6AXuBsGW-Vm2Ea1VUGOb7gvDhrWzT65F1eVzNuXNZN0kUT7PfjJTTXBgsEgKpVxxjYna_xLTzYmtdhFJz33XsxEOJpPZGmZbhzLWfl0RZZz7Sr6zRqg3Oxgn20rPwMaGrB4gZbmAXkwQK05-_3TojIY47GV47TMZyHyQWWjGU8JThkW5sfQgFuA47tXCzPPwqu3dnPgw8BcI1awcN0AJCs3CrrLOEYDARqdNPuSZOblTGXZo4mnd67SVazGxn5TkrxCmT5J4asp8uvB21W"
-          }
-        />
-        <div className="flex flex-col items-center justify-center gap-4">
+        <ProfileThumbnail url={data?.thumbnail} profileName={data?.nickname} />
+        <div className="flex flex-col items-center justify-center gap-4 mt-2">
           <p className="text-2xl font-bold leading-tight tracking-tight text-center">
             {data?.nickname}
           </p>
