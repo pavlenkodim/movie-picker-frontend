@@ -27,7 +27,7 @@ const ProfileModule = () => {
   const { data, isPending, error } = useQuery({
     queryKey: ["profile", userId],
     queryFn: () => apiClient<Profile>(`profiles/${userId}`),
-    retry: 2,
+    retry: 0,
     enabled: !!userId,
   });
 
@@ -36,9 +36,6 @@ const ProfileModule = () => {
       router.push("profile/create");
     }
   }, [error, router]);
-
-  console.log("profile", data);
-  console.log("error", error?.message);
 
   return (
     <div className="flex w-full h-full flex-col justify-between gap-6 items-center p-4">

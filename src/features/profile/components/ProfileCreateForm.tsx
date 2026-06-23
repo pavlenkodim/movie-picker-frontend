@@ -44,11 +44,10 @@ const ProfileCreateForm = () => {
     mutationFn: async (data: ProfileFormValues) => {
       const formData = new FormData();
       formData.append("userId", String(userId));
-      formData.append("nicname", data.nickname);
+      formData.append("nickname", data.nickname);
       if (data.thumbnail?.[0]) {
         formData.append("thumbnail", data.thumbnail[0]);
       }
-      console.log("data", formData);
       const result = await apiClient<Profile>("profiles", {
         method: "POST",
         body: formData,

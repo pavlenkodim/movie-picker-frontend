@@ -25,7 +25,7 @@ const ProfileThumbnail = ({
             bgColor,
           )}
           data-alt={profileName ?? "nikname"}
-          style={{ backgroundImage: `url(${url})` }}
+          style={url ? { backgroundImage: `url(${url})` } : {}}
         >
           {children ? children : !url && profileName?.split("")[0]}
         </div>
