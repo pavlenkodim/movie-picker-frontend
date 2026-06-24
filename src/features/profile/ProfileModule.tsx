@@ -45,7 +45,7 @@ const ProfileModule = () => {
           <p className="text-2xl font-bold leading-tight tracking-tight text-center">
             {data?.nickname}
           </p>
-          <Button variant="secondary" size="large">
+          <Button variant="secondary" size="large" onClick={() => router.push("profile/edit")}>
             Edit profile
           </Button>
         </div>

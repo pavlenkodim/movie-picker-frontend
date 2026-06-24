@@ -27,7 +27,6 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await getServerSession(options);
-  console.log("Backend URL:", process.env.NEXT_PUBLIC_BACKEND_URL);
 
   return (
     <html lang="en" suppressHydrationWarning data-lt-installed="true">
