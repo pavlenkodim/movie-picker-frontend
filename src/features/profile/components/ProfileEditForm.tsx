@@ -10,7 +10,7 @@ import { useSession } from "next-auth/react";
 import { apiClient } from "@/shared/api/api";
 import { Profile } from "../types";
 import ProfileThumbnail from "./ProfileThumbnail";
-import { Camera, Save } from "lucide-react";
+import { ArrowLeft, Camera, Save } from "lucide-react";
 import Button from "@/shared/ui/Button";
 import { useRef, useState } from "react";
 
@@ -116,9 +116,27 @@ const ProfileEditForm = () => {
           {errors.root && <p className="text-red-500 text-sm mt-5">{errors.root.message}</p>}
         </div>
 
-        <Button type="submit" variant="primary" size="large" className="w-full" loading={isPending}>
-          Save <Save />
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button
+            type="button"
+            variant="secondary"
+            size="large"
+            className="w-full"
+            loading={isPending}
+            onClick={() => router.back()}
+          >
+            <ArrowLeft /> Cancel
+          </Button>
+          <Button
+            type="submit"
+            variant="primary"
+            size="large"
+            className="w-full"
+            loading={isPending}
+          >
+            <Save /> Save
+          </Button>
+        </div>
       </form>
     </>
   );
