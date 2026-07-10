@@ -34,7 +34,7 @@ const RegisterForm = () => {
   const onSubmit = async (data: RegisterFormValues) => {
     registration(data, {
       onSuccess: () => {
-        router.push("profile/create");
+        router.push("/profile/create");
       },
       onError: (error) => {
         setError("root", { message: error.message });

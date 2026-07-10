@@ -1,26 +1,11 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { signIn } from "next-auth/react";
+import { useMutation } from "@tanstack/react-query";
 import { LoginFormValues } from "../schemas";
+import { signInWithCredentials } from "../utils";
 
 export const useLogin = () => {
-  const queryClient = useQueryClient();
-
   return useMutation({
     mutationFn: async (data: LoginFormValues) => {
-      const result = await signIn("credentials", {
-        email: data.email,
-        password: data.password,
-        redirect: false,
-      });
-
-      if (!result?.ok) {
-        throw new Error(result?.error || "Invalid credentials");
-      }
-
-      return result;
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["session"] });
+      return await signInWithCredentials(data.email, data.password, false);
     },
     onError: (error: Error) => {
       console.error("Login failed:", error);

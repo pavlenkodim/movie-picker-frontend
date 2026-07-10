@@ -15,8 +15,7 @@ import Button from "@/shared/ui/Button";
 import { useRef, useState } from "react";
 
 const ProfileCreateForm = () => {
-  const session = useSession();
-  const userId = session.data?.user.id;
+  const { update } = useSession();
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [preview, setPreview] = useState<string | null>(null);
@@ -43,19 +42,19 @@ const ProfileCreateForm = () => {
   const { mutate, isPending } = useMutation({
     mutationFn: async (data: ProfileFormValues) => {
       const formData = new FormData();
-      formData.append("userId", String(userId));
       formData.append("nickname", data.nickname);
       if (data.thumbnail?.[0]) {
         formData.append("thumbnail", data.thumbnail[0]);
       }
-      const result = await apiClient<Profile>("profiles", {
+      const result = await apiClient<{ token: string; profile: Profile }>("profiles", {
         method: "POST",
         body: formData,
       });
 
       return result;
     },
-    onSuccess: () => {
+    onSuccess: async (result) => {
+      await update({ token: result.token, profileId: result.profile.id });
       router.push("/movies");
     },
     onError: (error) => {

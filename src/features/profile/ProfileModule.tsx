@@ -20,15 +20,12 @@ interface Profile {
 }
 
 const ProfileModule = () => {
-  const session = useSession();
-  const userId = session.data?.user.id;
   const router = useRouter();
 
   const { data, isPending, error } = useQuery({
-    queryKey: ["profile", userId],
-    queryFn: () => apiClient<Profile>(`profiles/${userId}`),
+    queryKey: ["profile"],
+    queryFn: () => apiClient<Profile>("profiles/me"),
     retry: 0,
-    enabled: !!userId,
   });
 
   useEffect(() => {

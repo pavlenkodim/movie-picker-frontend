@@ -55,15 +55,20 @@ export const options: NextAuthOptions = {
   },
 
   callbacks: {
-    async jwt({ token, user, account }) {
+    async jwt({ token, user, account, trigger, session }) {
       if (user) {
         token.id = user.id as number;
         token.email = user.email;
+        token.profileId = user.profileId;
         token.banned = user.banned;
         token.banReason = user.banReason;
         token.roles = user.roles;
         token.token = user.token;
         token.provider = account?.provider;
+      }
+      if (trigger === "update" && session) {
+        token.token = session.token ?? token.token;
+        token.profileId = session.profileId ?? token.profileId;
       }
       return token;
     },
@@ -72,6 +77,7 @@ export const options: NextAuthOptions = {
       session.user = {
         id: token.id,
         email: token.email,
+        profileId: token.profileId,
         banned: token.banned,
         banReason: token.banReason,
         roles: token.roles,

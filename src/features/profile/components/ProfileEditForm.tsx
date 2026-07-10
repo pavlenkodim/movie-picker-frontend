@@ -25,7 +25,7 @@ const ProfileEditForm = () => {
 
   const { data: profile } = useQuery({
     queryKey: ["profile", userId],
-    queryFn: () => apiClient<Profile>(`profiles/${userId}`),
+    queryFn: () => apiClient<Profile>(`profiles/me`),
     initialData: () => queryClient.getQueryData<Profile>(["profile", userId]),
   });
 

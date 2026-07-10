@@ -16,6 +16,7 @@ declare module "next-auth" {
   interface User {
     id: number;
     email: string;
+    profileId?: number;
     banned: boolean;
     banReason: string | null;
     roles: Role[];
@@ -26,6 +27,7 @@ declare module "next-auth" {
     user: {
       id: number;
       email: string;
+      profileId?: number;
       banned: boolean;
       banReason: string | null;
       roles: Role[];
@@ -39,6 +41,7 @@ declare module "next-auth/jwt" {
     id: number;
     email: string;
     banned: boolean;
+    profileId?: number;
     banReason: string | null;
     roles: Role[];
     token: string;

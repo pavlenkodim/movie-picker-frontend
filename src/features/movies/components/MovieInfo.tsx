@@ -32,7 +32,6 @@ const MovieInfo = ({ movie, isOpen, onToggle, onLike, onDislike }: MovieInfoProp
       onToggle();
     }
 
-    // Всегда возвращаем на место — позиционирование через animate родителя
     y.set(0);
   };
 
@@ -46,8 +45,8 @@ const MovieInfo = ({ movie, isOpen, onToggle, onLike, onDislike }: MovieInfoProp
         drag="y"
         dragConstraints={{ top: 0, bottom: 0 }}
         dragElastic={{
-          top: isOpen ? 0.05 : 0.4, // открыто — вверх почти не тянется
-          bottom: isOpen ? 0.4 : 0.05, // закрыто — вниз почти не тянется
+          top: isOpen ? 0.05 : 0.4,
+          bottom: isOpen ? 0.4 : 0.05,
         }}
         style={{ y }}
         onDragEnd={handleDragEnd}
