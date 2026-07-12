@@ -42,7 +42,7 @@ export const MovieCard = ({ movie, onSwipe, isTop }: MovieCardProps) => {
     onSwipe(movie.id, direction);
   };
 
-  const handleDragEnd = async (_: never, info: PanInfo) => {
+  const handleDragEnd = async (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
     const { offset } = info;
 
     if (offset.x > SWIPE_THRESHOLD) {
@@ -54,17 +54,6 @@ export const MovieCard = ({ movie, onSwipe, isTop }: MovieCardProps) => {
       await flyOut("dislike");
       return;
     }
-
-    // if (offset.y < -SWIPE_THRESHOLD) {
-    //   controls.start({ x: 0, y: 0, rotate: 0, transition: { duration: 0.3 } });
-    //   onOpenInfo();
-    //   return;
-    // }
-
-    // if (offset.y > SWIPE_THRESHOLD) {
-    //   await flyOut("skip");
-    //   return;
-    // }
 
     controls.start({
       x: 0,

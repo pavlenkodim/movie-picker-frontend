@@ -1,5 +1,5 @@
 import { apiClient } from "@/shared/api/api";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 
 interface SwipeData {
   movieId: number;
@@ -13,13 +13,12 @@ interface SwipeResponse {
   liked: boolean;
 }
 
-export function useSwipe(data: SwipeData) {
-  const queryClient = useQueryClient();
-
+export function useSwipe() {
   return useMutation({
-    mutationFn: () => apiClient<SwipeResponse, SwipeData>("swipes", { method: "POST", body: data }),
-    onSuccess: () => {
-      // queryClient.invalidateQueries({ queryKey: ["recommendations"] });
+    mutationFn: (data: SwipeData) =>
+      apiClient<SwipeResponse, SwipeData>("swipes", { method: "POST", body: data }),
+    onError: (error) => {
+      console.error("Error swiping movie:", error);
     },
   });
 }

@@ -31,20 +31,3 @@ export interface SessionStat {
   action: SwipeAction;
   timestamp: number;
 }
-
-export interface MovieStore {
-  activeMovies: Movie[];
-  pendingMovies: Movie[];
-  currentIndex: number;
-
-  isInfoOpen: boolean;
-
-  sessionStats: SessionStat[];
-
-  swipe: (movieId: number, action: SwipeAction) => void;
-  openInfo: () => void;
-  closeInfo: () => void;
-  promotePending: () => void;
-  setPendingMovies: (movies: Movie[]) => void;
-  setActiveMovies: (movies: Movie[]) => void;
-}

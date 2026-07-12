@@ -9,10 +9,10 @@ interface RecommendationResponse {
 }
 
 export const useMovies = () => {
-  return useQuery<RecommendationResponse[]>({
+  return useQuery<RecommendationResponse[], Error, Movie[]>({
     queryKey: ["recommendations", "active"],
     queryFn: () => apiClient<RecommendationResponse[]>("recommendations"),
-    // select: (data) => data.map((r) => r.movie),
+    select: (data) => data.map((r) => r.movie),
     staleTime: 0,
   });
 };

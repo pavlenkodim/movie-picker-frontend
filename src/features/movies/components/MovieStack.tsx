@@ -2,18 +2,38 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useMovies } from "../hooks/useMovies";
-import useMovieStore from "../store/movieStore";
 import { MovieCard } from "./MovieCard";
+import useSwipeSessionStore from "../store/swipeSessionStore ";
+import { useEffect } from "react";
+import { useSwipe } from "../hooks/useSwipe";
 
 const STACK_SIZE = 3;
 
 export const MovieStack = () => {
-  const { isLoading, data } = useMovies();
-  const { activeMovies, currentIndex, swipe } = useMovieStore();
+  const { data, refetch, isFetching } = useMovies();
+  const movies = data ?? [];
 
-  const visibleMovies = data?.slice(currentIndex, currentIndex + STACK_SIZE);
+  const { currentIndex, totalCount, swipe, setTotalCount, resetIndex } = useSwipeSessionStore();
+  const { mutate: sendSwipe } = useSwipe();
 
-  if (visibleMovies?.length === 0) {
+  useEffect(() => {
+    setTotalCount(movies.length);
+  }, [movies.length, setTotalCount]);
+
+  useEffect(() => {
+    if (totalCount > 0 && currentIndex >= totalCount && !isFetching) {
+      refetch().then(() => resetIndex());
+    }
+  }, [currentIndex, totalCount, isFetching, refetch, resetIndex]);
+
+  const handleSwipe = (movieId: number, action: "like" | "dislike") => {
+    sendSwipe({ movieId, liked: action === "like" });
+    swipe(movieId, action);
+  };
+
+  const visibleMovies = movies.slice(currentIndex, currentIndex + STACK_SIZE);
+
+  if (visibleMovies?.length === 0 && !isFetching) {
     return (
       <div className="flex items-center justify-center h-full">
         <p className="text-white/50 text-lg">The movies are over</p>
@@ -24,7 +44,7 @@ export const MovieStack = () => {
   return (
     <div className="relative w-full h-full px-4 md:px-0">
       <AnimatePresence>
-        {visibleMovies?.map(({ movie }, index) => {
+        {visibleMovies?.map((movie, index) => {
           const isTop = index === 0;
 
           const scale = 1 - index * 0.05;
@@ -46,11 +66,7 @@ export const MovieStack = () => {
                 transition: { duration: 0.2 },
               }}
             >
-              <MovieCard
-                movie={movie}
-                onSwipe={swipe}
-                isTop={isTop}
-              />
+              <MovieCard movie={movie} onSwipe={handleSwipe} isTop={isTop} />
             </motion.div>
           );
         })}
