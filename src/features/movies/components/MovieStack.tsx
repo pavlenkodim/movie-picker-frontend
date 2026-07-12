@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useMovies } from "../hooks/useMovies";
 import { MovieCard } from "./MovieCard";
-import useSwipeSessionStore from "../store/swipeSessionStore ";
+import useSwipeSessionStore from "../store/swipeSessionStore";
 import { useEffect } from "react";
 import { useSwipe } from "../hooks/useSwipe";
 import MovieCardSkeleton from "./Skeleton";

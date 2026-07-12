@@ -3,17 +3,24 @@ import { useQuery } from "@tanstack/react-query";
 import { Movie } from "../types";
 import { apiClient } from "@/shared/api/api";
 
-interface RecommendationResponse {
+interface ScoredMovie {
   movie: Movie;
   score: number;
 }
 
+interface RecommendationResponse {
+  data: ScoredMovie[];
+  hasMore: boolean;
+}
+
 export const useMovies = () => {
-  return useQuery<RecommendationResponse[], Error, Movie[]>({
+  return useQuery<RecommendationResponse, Error, Movie[]>({
     queryKey: ["recommendations", "active"],
-    queryFn: () => apiClient<RecommendationResponse[]>("recommendations"),
-    select: (data) => data.map((r) => r.movie),
-    staleTime: 0,
+    queryFn: () => apiClient<RecommendationResponse>("recommendations"),
+    select: (response) => response.data.map((r) => r.movie),
+    staleTime: Infinity,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
   });
 };
 

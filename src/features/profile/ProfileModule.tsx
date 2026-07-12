@@ -69,7 +69,8 @@ const ProfileModule = () => {
               className="relative overflow-hidden"
             >
               <span
-                className={`absolute left-0 z-0 h-full bg-foreground/50 w-[${genre.weight * 100}%]`}
+                className={`absolute left-0 z-0 h-full bg-foreground/20 rounded-r-xl`}
+                style={{ width: genre.weight * 100 + "%" }}
               ></span>
               {allGenres?.find((g) => g.id === genre.genreId)?.name}
             </Button>
