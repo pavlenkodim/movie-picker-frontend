@@ -1,17 +1,6 @@
 import { apiClient } from "@/shared/api/api";
 import { useMutation } from "@tanstack/react-query";
-
-interface SwipeData {
-  movieId: number;
-  liked: boolean;
-}
-
-interface SwipeResponse {
-  id: number;
-  profileId: number;
-  movieId: number;
-  liked: boolean;
-}
+import { SwipeData, SwipeResponse } from "../types";
 
 export function useSwipe() {
   return useMutation({

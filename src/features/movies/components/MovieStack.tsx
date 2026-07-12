@@ -6,11 +6,12 @@ import { MovieCard } from "./MovieCard";
 import useSwipeSessionStore from "../store/swipeSessionStore ";
 import { useEffect } from "react";
 import { useSwipe } from "../hooks/useSwipe";
+import MovieCardSkeleton from "./Skeleton";
 
 const STACK_SIZE = 3;
 
 export const MovieStack = () => {
-  const { data, refetch, isFetching } = useMovies();
+  const { data, refetch, isFetching, isLoading } = useMovies();
   const movies = data ?? [];
 
   const { currentIndex, totalCount, swipe, setTotalCount, resetIndex } = useSwipeSessionStore();
@@ -32,6 +33,10 @@ export const MovieStack = () => {
   };
 
   const visibleMovies = movies.slice(currentIndex, currentIndex + STACK_SIZE);
+
+  if (isLoading || (isFetching && visibleMovies.length === 0)) {
+    return <MovieCardSkeleton />;
+  }
 
   if (visibleMovies?.length === 0 && !isFetching) {
     return (

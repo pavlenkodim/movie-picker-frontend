@@ -23,8 +23,7 @@ const useSwipeSessionStore = create<SwipeSessionStore>((set) => ({
 
   setTotalCount: (count) => set({ totalCount: count }),
 
-  // сброс индекса при получении новой пачки, sessionStats и totalCount трогать не нужно —
-  // totalCount обновится сам от новых данных, а sessionStats можно чистить отдельно, если нужно
+  // Reset the current index to 0 and clear session stats
   resetIndex: () => set({ currentIndex: 0 }),
 }));
 

@@ -22,7 +22,7 @@ const ProfileThumbnail = ({
           className={cn(
             "bg-center bg-no-repeat aspect-square bg-cover rounded-full h-32 w-32 flex items-center justify-center text-5xl font-bold",
             profileName && colorFromLetter(profileName[0]),
-            bgColor,
+            url ? "bg-foreground/50" : bgColor,
           )}
           data-alt={profileName ?? "nikname"}
           style={url ? { backgroundImage: `url(${url})` } : {}}

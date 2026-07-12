@@ -31,3 +31,15 @@ export interface SessionStat {
   action: SwipeAction;
   timestamp: number;
 }
+
+export interface SwipeData {
+  movieId: number;
+  liked: boolean;
+}
+
+export interface SwipeResponse {
+  id: number;
+  profileId: number;
+  movieId: number;
+  liked: boolean;
+}

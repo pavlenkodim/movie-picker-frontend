@@ -48,7 +48,7 @@ const MovieInfo = ({ movie, isOpen, onToggle, onLike, onDislike }: MovieInfoProp
           top: isOpen ? 0.05 : 0.4,
           bottom: isOpen ? 0.4 : 0.05,
         }}
-        style={{ y }}
+        style={{ y, touchAction: "none" }}
         onDragEnd={handleDragEnd}
       >
         <div className="w-full p-3 flex justify-between z-10">
@@ -71,7 +71,7 @@ const MovieInfo = ({ movie, isOpen, onToggle, onLike, onDislike }: MovieInfoProp
         <GlassArea
           className={cn(
             "w-full overflow-y-auto p-6 pb-8 border-b-0 rounded-3xl z-20 transition-all duration-300",
-            !isOpen && "bg-transparent backdrop-blur-none",
+            !isOpen && "bg-transparent dark:bg-transparent backdrop-blur-none",
           )}
         >
           <div className="flex justify-center -mt-4">
