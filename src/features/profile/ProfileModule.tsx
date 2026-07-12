@@ -48,7 +48,7 @@ const ProfileModule = () => {
   }
 
   return (
-    <div className="flex w-full h-full flex-col justify-between gap-6 items-center p-4">
+    <div className="flex w-full h-[calc(100vh-72px)] flex-col justify-between gap-6 items-center p-4">
       <div>
         <ProfileThumbnail url={data?.thumbnail} profileName={data?.nickname} />
         <div className="flex flex-col items-center justify-center gap-4 mt-2">
@@ -76,7 +76,9 @@ const ProfileModule = () => {
           ))}
         </div>
       </div>
-      <SignOutButton />
+      <div className="w-full pb-16">
+        <SignOutButton className="min-h-14" />
+      </div>
     </div>
   );
 };

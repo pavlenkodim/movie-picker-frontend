@@ -1,16 +1,18 @@
 "use client";
 
+import { cn } from "@/shared/libs/utils";
 import Button from "@/shared/ui/Button";
 import { LogOut } from "lucide-react";
 import { signOut } from "next-auth/react";
 
-const SignOutButton = () => {
+const SignOutButton = ({ className, ...props }: React.ButtonHTMLAttributes<HTMLButtonElement>) => {
   return (
     <Button
       variant="danger"
       size="large"
-      className="w-full max-w-[448px]"
+      className={cn("w-full max-w-[448px]", className)}
       onClick={() => signOut({ callbackUrl: "/" })}
+      {...props}
     >
       <LogOut /> Log out
     </Button>

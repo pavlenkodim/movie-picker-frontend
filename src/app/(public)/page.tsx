@@ -3,9 +3,12 @@ import Link from "next/link";
 import { options } from "../api/auth/[...nextauth]/options";
 import Header from "@/shared/ui/Header";
 import { LogIn } from "lucide-react";
+import packageJson from "../../../package.json";
 
 export default async function Home() {
   const session = await getServerSession(options);
+  const appVersion = packageJson.version;
+
   return (
     <div className="w-full min-h-screen">
       <Header
@@ -152,9 +155,10 @@ export default async function Home() {
         </div>
       </section>
 
-      <footer className="py-8 px-6 border-t border-black/10 dark:border-white/10 text-center text-gray-600 dark:text-gray-400 text-sm">
+      <footer className="py-8 px-6 border-t border-black/10 dark:border-white/10 text-center text-gray-600 dark:text-gray-400 text-sm pb-20">
         <div className="max-w-md mx-auto">
-          <p>© 2026 Filmder. Making movie night decisions easy.</p>
+          <p>Making movie night decisions easy.</p>
+          <p>© 2026 Filmder v{appVersion}</p>
         </div>
       </footer>
     </div>
