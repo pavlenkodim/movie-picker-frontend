@@ -1,0 +1,13 @@
+import ProfileInitalGenresForm from "@/features/profile/components/ProfileInitalGenresForm";
+import Header from "@/shared/ui/Header";
+
+const InitialGenresPage = () => {
+  return (
+    <div className="py-18 h-full px-4 md:px-32">
+      <Header center={<h1 className="text-2xl text-center font-bold capitalize">Filmder</h1>} />
+      <ProfileInitalGenresForm />
+    </div>
+  );
+};
+
+export default InitialGenresPage;

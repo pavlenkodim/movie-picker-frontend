@@ -8,12 +8,12 @@ import { MovieCard } from "./MovieCard";
 const STACK_SIZE = 3;
 
 export const MovieStack = () => {
-  const { isLoading } = useMovies();
-  const { activeMovies, currentIndex, swipe, openInfo, closeInfo } = useMovieStore();
+  const { isLoading, data } = useMovies();
+  const { activeMovies, currentIndex, swipe } = useMovieStore();
 
-  const visibleMovies = activeMovies.slice(currentIndex, currentIndex + STACK_SIZE);
+  const visibleMovies = data?.slice(currentIndex, currentIndex + STACK_SIZE);
 
-  if (visibleMovies.length === 0) {
+  if (visibleMovies?.length === 0) {
     return (
       <div className="flex items-center justify-center h-full">
         <p className="text-white/50 text-lg">The movies are over</p>
@@ -24,7 +24,7 @@ export const MovieStack = () => {
   return (
     <div className="relative w-full h-full px-4 md:px-0">
       <AnimatePresence>
-        {visibleMovies.map((movie, index) => {
+        {visibleMovies?.map(({ movie }, index) => {
           const isTop = index === 0;
 
           const scale = 1 - index * 0.05;
@@ -32,7 +32,7 @@ export const MovieStack = () => {
 
           return (
             <motion.div
-              key={movie.id}
+              key={movie?.id}
               className="absolute inset-0"
               style={{ zIndex: STACK_SIZE - index }}
               animate={{
@@ -49,8 +49,6 @@ export const MovieStack = () => {
               <MovieCard
                 movie={movie}
                 onSwipe={swipe}
-                onOpenInfo={openInfo}
-                onCloseInfo={closeInfo}
                 isTop={isTop}
               />
             </motion.div>

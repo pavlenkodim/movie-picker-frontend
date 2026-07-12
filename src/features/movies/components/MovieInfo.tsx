@@ -38,7 +38,7 @@ const MovieInfo = ({ movie, isOpen, onToggle, onLike, onDislike }: MovieInfoProp
   return (
     <motion.div
       className="w-full"
-      animate={{ y: isOpen ? 0 : 415 }}
+      animate={{ y: isOpen ? 0 : 130 }}
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
     >
       <motion.div
@@ -86,52 +86,39 @@ const MovieInfo = ({ movie, isOpen, onToggle, onLike, onDislike }: MovieInfoProp
 
           <div className="flex items-end justify-between z-20">
             <div className="flex flex-col gap-1 z-20">
-              <h2 className="text-2xl font-bold">{movie.title}</h2>
+              <h2 className="text-2xl font-bold">{movie?.title}</h2>
               <p className="text-sm mt-1">
-                {movie.year} · {movie.genres[0]} · {Math.floor(movie.duration / 60)}h{" "}
-                {movie.duration % 60}m
+                {new Date(movie?.releaseDate).getFullYear()} · {movie?.genres[0]?.name}
               </p>
             </div>
             <div className="bg-black/20 dark:bg-white/20 backdrop-blur-sm rounded-full px-3 py-1 flex items-center gap-1">
               <span className="text-yellow-400 text-sm">
                 <Star size={16} />
               </span>
-              <span className="text-white text-sm font-medium">{movie.rating}</span>
+              <span className="text-white text-sm font-medium">
+                {movie?.voteAverage?.toFixed(1)}
+              </span>
             </div>
           </div>
 
           <div className="flex flex-col justify-between gap-6 mt-4">
             <div className="flex flex-col gap-4">
-              {movie.genres && (
+              {movie?.genres?.length > 0 && (
                 <div className="flex items-center gap-2">
                   {movie.genres.map((genre) => (
                     <span
-                      key={genre}
+                      key={movie?.id?.toString() + genre?.id}
                       className="text-sm text-white/80 bg-foreground/10 rounded-full px-3 py-1"
                     >
-                      {genre}
+                      {genre.name}
                     </span>
                   ))}
                 </div>
               )}
 
-              <p className="text-sm ">{movie.synopsis}</p>
+              <p className="text-sm ">{movie?.overview}</p>
 
-              {movie.director && (
-                <p className="text-sm">
-                  <span className="font-semibold">Director:</span> {movie.director}
-                </p>
-              )}
-
-              {movie.studio && (
-                <p className="text-sm">
-                  <span className="font-semibold">Studio:</span> {movie.studio}
-                </p>
-              )}
-
-              {}
-
-              {movie.actors && (
+              {/* {movie.actors && (
                 <div>
                   <h3 className="text-sm font-semibold">Actors:</h3>
                   <div className="flex items-start flex-nowrap gap-4 overflow-x-auto py-2">
@@ -154,10 +141,10 @@ const MovieInfo = ({ movie, isOpen, onToggle, onLike, onDislike }: MovieInfoProp
                     ))}
                   </div>
                 </div>
-              )}
+              )} */}
             </div>
 
-            {movie?.trailerUrl && (
+            {/* {movie?.trailerUrl && (
               <Link
                 className="flex items-center gap-2 justify-center rounded-full h-14 px-5 text-lg font-bold text-background bg-foreground hover:bg-foreground/90"
                 href={movie.trailerUrl}
@@ -166,7 +153,7 @@ const MovieInfo = ({ movie, isOpen, onToggle, onLike, onDislike }: MovieInfoProp
               >
                 Watch trailer <ExternalLink size={18} />
               </Link>
-            )}
+            )} */}
           </div>
         </GlassArea>
       </motion.div>

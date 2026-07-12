@@ -55,7 +55,7 @@ const ProfileCreateForm = () => {
     },
     onSuccess: async (result) => {
       await update({ token: result.token, profileId: result.profile.id });
-      router.push("/movies");
+      router.push("/profile/initial-genres");
     },
     onError: (error) => {
       setError("root", { message: error.message });

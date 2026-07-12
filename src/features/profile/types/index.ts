@@ -4,3 +4,10 @@ export interface Profile {
   nickname: string;
   thumbnail: string;
 }
+
+export interface GenreWeight {
+  id: number;
+  profileId: number;
+  genreId: number;
+  weight: number;
+}

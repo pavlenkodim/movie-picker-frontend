@@ -4,7 +4,7 @@ import Header from "@/shared/ui/Header";
 const MoviesPage = () => {
   return (
     <>
-      <Header />
+      <Header center={<h1 className="text-2xl text-center font-bold capitalize">Filmder</h1>} />
       <MoviesModule />
     </>
   );

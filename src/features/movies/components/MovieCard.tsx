@@ -3,16 +3,15 @@
 import { motion, PanInfo, useAnimation, useMotionValue, useTransform } from "framer-motion";
 import { Movie } from "../types";
 import Picture from "@/shared/ui/Picture";
-import { Heart, Star, X } from "lucide-react";
-import Button from "@/shared/ui/Button";
+import { Heart, X } from "lucide-react";
 import { useState } from "react";
 import MovieInfo from "./MovieInfo";
 
+const BASE_IMAGE_URL = "https://image.tmdb.org/t/p/w500";
+
 interface MovieCardProps {
   movie: Movie;
-  onSwipe: (movieId: number, direction: "like" | "dislike" | "skip") => void;
-  onOpenInfo?: () => void;
-  onCloseInfo?: () => void;
+  onSwipe: (movieId: number, direction: "like" | "dislike") => void;
   isTop: boolean;
 }
 
@@ -20,7 +19,7 @@ const SWIPE_THRESHOLD = 100;
 
 export const MovieCard = ({ movie, onSwipe, isTop }: MovieCardProps) => {
   const [isInfoOpen, setIsInfoOpen] = useState<boolean>(false);
-  // const { isInfoOpen } = useMovieStore();
+
   const controls = useAnimation();
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -29,11 +28,10 @@ export const MovieCard = ({ movie, onSwipe, isTop }: MovieCardProps) => {
   const likeOpacity = useTransform(x, [0, SWIPE_THRESHOLD], [0, 1]);
   const dislikeOpacity = useTransform(x, [-SWIPE_THRESHOLD, 0], [1, 0]);
 
-  const flyOut = async (direction: "like" | "dislike" | "skip") => {
+  const flyOut = async (direction: "like" | "dislike") => {
     const targets = {
       like: { x: 600, y: 0, rotate: 30, opacity: 0 },
       dislike: { x: -600, y: 0, rotate: -30, opacity: 0 },
-      skip: { x: 0, y: 600, rotate: 0, opacity: 0 },
     };
 
     await controls.start({
@@ -89,7 +87,7 @@ export const MovieCard = ({ movie, onSwipe, isTop }: MovieCardProps) => {
     >
       <div className="relative w-full h-full rounded-3xl overflow-hidden flex flex-col justify-end">
         <Picture
-          src={movie?.posterUrl ?? "/data/image.png"}
+          src={movie?.posterPath ? BASE_IMAGE_URL + movie?.posterPath : "/data/image.png"}
           alt={movie?.title}
           className="w-full h-full object-cover absolute"
           width={500}

@@ -1,20 +1,17 @@
-export type SwipeAction = "like" | "dislike" | "skip";
+import { Genre } from "@/shared/types";
+
+export type SwipeAction = "like" | "dislike";
 
 export interface Movie {
   id: number;
   title: string;
-  year: number;
-  duration: number;
-  rating: number;
-  genres: string[];
-  synopsis: string;
-  posterUrl: string;
-  backdropUrl?: string;
-  // cast?: CastMember[];
-  actors?: Actor[];
-  director: string;
-  studio: string;
-  trailerUrl?: string;
+  overview: string;
+  posterPath: string;
+  voteAverage: number;
+  voteCount: number;
+  popularity: number;
+  releaseDate: string;
+  genres: Genre[];
 }
 
 export interface CastMember {

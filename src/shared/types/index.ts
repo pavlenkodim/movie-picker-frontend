@@ -27,3 +27,8 @@ export interface Role {
   updatedAt: string;
   UserRoles: UserRoles;
 }
+
+export interface Genre {
+  id: number;
+  name: string;
+}
