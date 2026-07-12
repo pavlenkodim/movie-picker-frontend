@@ -2,9 +2,7 @@
 
 import GlassArea from "@/shared/ui/GlassArea";
 import { Movie } from "../types";
-import { ExternalLink, Heart, Star, X } from "lucide-react";
-import Link from "next/link";
-import Picture from "@/shared/ui/Picture";
+import { Heart, Star, X } from "lucide-react";
 import { cn } from "@/shared/libs/utils";
 import { motion, PanInfo, useMotionValue } from "framer-motion";
 import Button from "@/shared/ui/Button";
@@ -37,7 +35,7 @@ const MovieInfo = ({ movie, isOpen, onToggle, onLike, onDislike }: MovieInfoProp
 
   return (
     <motion.div
-      className="w-full"
+      className="w-full touch-none overscroll-none"
       animate={{ y: isOpen ? 0 : 130 }}
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
     >
@@ -48,6 +46,7 @@ const MovieInfo = ({ movie, isOpen, onToggle, onLike, onDislike }: MovieInfoProp
           top: isOpen ? 0.05 : 0.4,
           bottom: isOpen ? 0.4 : 0.05,
         }}
+        className="touch-none"
         style={{ y, touchAction: "none" }}
         onDragEnd={handleDragEnd}
       >
