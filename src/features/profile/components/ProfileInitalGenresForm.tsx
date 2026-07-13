@@ -13,6 +13,23 @@ type InitialGenresFormValues = {
   genreIds: number[];
 };
 
+const Skeleton = () => {
+  return (
+    <div className="flex w-full h-full flex-col justify-between gap-6 items-center animate-pulse">
+      <div className="w-full flex flex-col items-center">
+        <div className="flex flex-wrap justify-center gap-4">
+          {Array.from({ length: 10 }).map((_, index) => (
+            <div
+              key={index}
+              className="h-12 w-28 rounded-full bg-zinc-200/70 dark:bg-zinc-800/80"
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const ProfileInitalGenresForm = () => {
   const router = useRouter();
   const { data: allGenres, isLoading, isError } = useGenres();
@@ -43,6 +60,7 @@ const ProfileInitalGenresForm = () => {
       >
         <div>
           <h2 className="text-xl font-semibold mb-4 text-center">Choose Your Favorite Genres</h2>
+          {isLoading && <Skeleton />}
           <div className="flex flex-wrap justify-center gap-4 mb-4">
             {allGenres?.map((genre) => (
               <Checkbox
@@ -55,7 +73,14 @@ const ProfileInitalGenresForm = () => {
             ))}
           </div>
         </div>
-        <Button type="submit" variant="primary" size="large" className="w-full" loading={isPending}>
+        <Button
+          type="submit"
+          variant="primary"
+          size="large"
+          className="w-full"
+          disabled={isLoading}
+          loading={isPending}
+        >
           Try Filmder
         </Button>
       </form>

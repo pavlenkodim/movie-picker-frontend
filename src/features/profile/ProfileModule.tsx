@@ -77,7 +77,7 @@ const ProfileModule = () => {
           ))}
         </div>
       </div>
-      <div className="w-full pb-16">
+      <div className="w-full pb-16 flex justify-center">
         <SignOutButton className="min-h-14" />
       </div>
     </div>

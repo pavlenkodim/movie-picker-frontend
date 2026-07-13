@@ -48,10 +48,6 @@ export default async function Home() {
           >
             Get Started Now
           </Link>
-
-          <p className="text-gray-500 dark:text-gray-500 text-sm mt-4">
-            Free. 5 swipes without signup
-          </p>
         </div>
       </section>
 
