@@ -93,7 +93,7 @@ const ProfileCreateForm = () => {
           <Input
             id="nickname"
             type="text"
-            label="Nicname"
+            label="Nickname"
             hSize="large"
             error={{ isError: !!errors.nickname, message: errors.nickname?.message }}
             {...register("nickname")}

@@ -17,8 +17,24 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_FRONTEND_URL ?? "http://localhost:3000"),
   title: "Filmder",
-  description: "Like Tinder, but for movies.",
+  description: "Swipe through movies and find what you really want to watch.",
+  openGraph: {
+    title: "Filmder - find your movie",
+    description: "Swipe through movies and find what you really want to watch.",
+    url: "/",
+    images: [{ url: "/og-banner.png", width: 1200, height: 630 }],
+    siteName: "Filmder",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Filmder - find your movie",
+    description: "Swipe through movies and find what you really want to watch.",
+    images: ["/og-banner.png"],
+  },
 };
 
 export default async function RootLayout({
