@@ -15,7 +15,7 @@ const ProfileSkeleton = () => {
           ))}
         </div>
       </div>
-      <div className="h-12 w-full max-w-[448px] rounded-full bg-zinc-200/70 dark:bg-zinc-800/80" />
+      <div className="h-12 w-full max-w-md rounded-full bg-zinc-200/70 dark:bg-zinc-800/80" />
     </div>
   );
 };

@@ -32,7 +32,7 @@ const Skeleton = () => {
 
 const ProfileInitalGenresForm = () => {
   const router = useRouter();
-  const { data: allGenres, isLoading, isError } = useGenres();
+  const { data: allGenres, isLoading } = useGenres();
 
   const { register, handleSubmit } = useForm<InitialGenresFormValues>({});
 
