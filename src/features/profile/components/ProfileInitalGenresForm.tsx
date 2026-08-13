@@ -34,7 +34,12 @@ const ProfileInitalGenresForm = () => {
   const router = useRouter();
   const { data: allGenres, isLoading } = useGenres();
 
-  const { register, handleSubmit } = useForm<InitialGenresFormValues>({});
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm<InitialGenresFormValues>({});
 
   const { mutate, isPending } = useMutation({
     mutationFn: async (data: InitialGenresFormValues) => {
@@ -43,12 +48,11 @@ const ProfileInitalGenresForm = () => {
         body: data,
       });
     },
-    onSuccess: (data) => {
-      console.log("Successfully submitted genres:", data);
+    onSuccess: () => {
       router.push("/movies");
     },
     onError: (error) => {
-      console.error("Error submitting genres:", error);
+      setError("root", { message: error.message });
     },
   });
 
@@ -72,6 +76,9 @@ const ProfileInitalGenresForm = () => {
               />
             ))}
           </div>
+          {errors.root && (
+            <div className="text-red-500 text-sm mt-5 mb-5 text-center">{errors.root.message}</div>
+          )}
         </div>
         <Button
           type="submit"

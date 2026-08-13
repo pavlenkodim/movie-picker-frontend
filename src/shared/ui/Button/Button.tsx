@@ -20,9 +20,9 @@ const Button = ({
   ...props
 }: ButtonProps) => {
   const sizeClasses = {
-    small: "h-8 px-3 text-sm",
-    medium: "h-12 px-5 text-base",
-    large: "h-14 px-5 text-lg font-bold",
+    small: "h-8 min-h-8 px-3 text-sm",
+    medium: "h-12 min-h-12 px-5 text-base",
+    large: "h-14 min-h-14 px-5 text-lg font-bold",
   };
 
   const variantClasses = {

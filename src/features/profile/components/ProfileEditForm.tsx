@@ -24,9 +24,9 @@ const ProfileEditForm = () => {
   const queryClient = useQueryClient();
 
   const { data: profile } = useQuery({
-    queryKey: ["profile", userId],
+    queryKey: ["profile"],
     queryFn: () => apiClient<Profile>(`profiles/me`),
-    initialData: () => queryClient.getQueryData<Profile>(["profile", userId]),
+    initialData: () => queryClient.getQueryData<Profile>(["profile"]),
   });
 
   const {
@@ -122,7 +122,7 @@ const ProfileEditForm = () => {
             variant="secondary"
             size="large"
             className="w-full"
-            loading={isPending}
+            disabled={isPending}
             onClick={() => router.back()}
           >
             <ArrowLeft /> Cancel

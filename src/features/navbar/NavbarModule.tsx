@@ -1,13 +1,12 @@
 "use client";
 
 import GlassArea from "@/shared/ui/GlassArea";
-import { Clapperboard, Compass, Heart, User } from "lucide-react";
+import { Clapperboard, Heart, User } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const LINKS = [
   { href: "/movies", icon: Clapperboard },
-  { href: "/", icon: Compass },
   { href: "/history", icon: Heart },
   { href: "/profile", icon: User },
 ];
