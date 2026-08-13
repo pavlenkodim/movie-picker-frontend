@@ -67,15 +67,25 @@ const LoginForm = () => {
           />
         </div>
         <div className="flex gap-4">
-          <Button variant="primary" type="submit" className="w-full" loading={isPending}>
+          <Button
+            variant="primary"
+            size="large"
+            type="submit"
+            className="w-full font-normal"
+            loading={isPending}
+          >
             Sign In
           </Button>
-          <Link
-            href="/"
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/8 px-5 transition-colors hover:border-transparent hover:bg-black/4 dark:border-white/[.145] dark:hover:bg-[#1a1a1a]"
+          <Button
+            onClick={() => router.push("/")}
+            variant="secondary"
+            size="large"
+            type="button"
+            className="w-full font-normal"
+            disabled={isPending}
           >
             Cancel
-          </Link>
+          </Button>
         </div>
         <div className="mt-4 text-center">
           <Link href="auth/forgot-password" className="text-sm hover:underline">

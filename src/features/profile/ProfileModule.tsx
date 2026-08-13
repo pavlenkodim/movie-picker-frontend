@@ -8,7 +8,6 @@ import SignOutButton from "../auth/components/SignOutButton";
 import { useEffect } from "react";
 import { ApiError } from "@/shared/api/api";
 import { useRouter } from "next/navigation";
-import { GenreWeight } from "./types";
 import useGenres from "@/shared/hooks/useGenres";
 import ProfileSkeleton from "./components/Skeleton";
 import useMyGenres from "@/shared/hooks/useMyGenres";

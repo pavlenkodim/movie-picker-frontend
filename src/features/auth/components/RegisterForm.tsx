@@ -2,7 +2,6 @@
 import { useState } from "react";
 import Input from "@/shared/ui/Input/Input";
 import Button from "@/shared/ui/Button/Button";
-import Link from "next/link";
 import { Eye, EyeClosed } from "lucide-react";
 import { useRegister } from "../hooks/useRegister";
 import { useForm } from "react-hook-form";
@@ -84,13 +83,23 @@ const RegisterForm = () => {
           />
         </div>
         <div className="flex gap-4">
-          <Link
-            href="/"
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/8 px-5 transition-colors hover:border-transparent hover:bg-black/4 dark:border-white/[.145] dark:hover:bg-[#1a1a1a]"
+          <Button
+            onClick={() => router.push("/")}
+            variant="secondary"
+            size="large"
+            type="button"
+            className="w-full font-normal"
+            disabled={isPending}
           >
             Cancel
-          </Link>
-          <Button variant="primary" className="w-full" type="submit" loading={isPending}>
+          </Button>
+          <Button
+            variant="primary"
+            size="large"
+            className="w-full font-normal"
+            type="submit"
+            loading={isPending}
+          >
             Next step
           </Button>
         </div>
