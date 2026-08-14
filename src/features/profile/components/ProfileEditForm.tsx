@@ -13,6 +13,7 @@ import ProfileThumbnail from "./ProfileThumbnail";
 import { ArrowLeft, Camera, Save } from "lucide-react";
 import Button from "@/shared/ui/Button";
 import { useRef, useState } from "react";
+import { useNotification } from "@/shared/hooks/useNotification";
 
 const ProfileEditForm = () => {
   const session = useSession();
@@ -20,19 +21,19 @@ const ProfileEditForm = () => {
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [localPreview, setLocalPreview] = useState<string | null>(null);
+  const { notify } = useNotification();
 
   const queryClient = useQueryClient();
 
   const { data: profile } = useQuery({
-    queryKey: ["profile", userId],
+    queryKey: ["profile"],
     queryFn: () => apiClient<Profile>(`profiles/me`),
-    initialData: () => queryClient.getQueryData<Profile>(["profile", userId]),
+    initialData: () => queryClient.getQueryData<Profile>(["profile"]),
   });
 
   const {
     register,
     handleSubmit,
-    setError,
     formState: { errors },
   } = useForm<ProfileFormValues>({
     resolver: zodResolver(profileSchema),
@@ -67,10 +68,11 @@ const ProfileEditForm = () => {
       return result;
     },
     onSuccess: () => {
+      notify("success", "You have successfully edited your account.");
       router.push("/profile");
     },
     onError: (error) => {
-      setError("root", { message: error.message });
+      notify("error", error.message);
     },
   });
 
@@ -113,7 +115,9 @@ const ProfileEditForm = () => {
             {...register("nickname")}
           />
 
-          {errors.root && <p className="text-red-500 text-sm mt-5">{errors.root.message}</p>}
+          {errors.root && (
+            <p className="text-red-500 text-sm mt-5 text-center">{errors.root.message}</p>
+          )}
         </div>
 
         <div className="flex items-center gap-2">
@@ -122,7 +126,7 @@ const ProfileEditForm = () => {
             variant="secondary"
             size="large"
             className="w-full"
-            loading={isPending}
+            disabled={isPending}
             onClick={() => router.back()}
           >
             <ArrowLeft /> Cancel

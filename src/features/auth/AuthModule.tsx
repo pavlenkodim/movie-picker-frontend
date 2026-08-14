@@ -16,7 +16,7 @@ const AuthModule = () => {
         <Button
           variant={currentTab === "login" ? "primary" : "secondary"}
           size="small"
-          className="md:min-w-[48px] md:max-w-[98px]"
+          className="md:min-w-12 md:max-w-24.5"
           onClick={() => push("?tab=login")}
         >
           Sign In
@@ -24,7 +24,7 @@ const AuthModule = () => {
         <Button
           variant={currentTab === "register" ? "primary" : "secondary"}
           size="small"
-          className="md:min-w-[48px] md:max-w-[98px]"
+          className="md:min-w-12 md:max-w-24.5"
           onClick={() => push("?tab=register")}
         >
           Sign Up

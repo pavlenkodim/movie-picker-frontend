@@ -2,19 +2,20 @@
 import { useState } from "react";
 import Input from "@/shared/ui/Input/Input";
 import Button from "@/shared/ui/Button/Button";
-import Link from "next/link";
 import { Eye, EyeClosed } from "lucide-react";
 import { useRegister } from "../hooks/useRegister";
 import { useForm } from "react-hook-form";
 import { RegisterFormValues, registerSchema } from "../schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
+import { useNotification } from "@/shared/hooks/useNotification";
 
 const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const { mutate: registration, isPending } = useRegister();
+  const { notify } = useNotification();
   const router = useRouter();
 
   const {
@@ -34,9 +35,12 @@ const RegisterForm = () => {
   const onSubmit = async (data: RegisterFormValues) => {
     registration(data, {
       onSuccess: () => {
+        notify("success", "You have successfully created your account.");
+        notify("info", "Please enter your nickname.");
         router.push("/profile/create");
       },
       onError: (error) => {
+        notify("error", error.message);
         setError("root", { message: error.message });
       },
     });
@@ -84,13 +88,23 @@ const RegisterForm = () => {
           />
         </div>
         <div className="flex gap-4">
-          <Link
-            href="/"
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a]"
+          <Button
+            onClick={() => router.push("/")}
+            variant="secondary"
+            size="large"
+            type="button"
+            className="w-full font-normal"
+            disabled={isPending}
           >
             Cancel
-          </Link>
-          <Button variant="primary" className="w-full" type="submit" loading={isPending}>
+          </Button>
+          <Button
+            variant="primary"
+            size="large"
+            className="w-full font-normal"
+            type="submit"
+            loading={isPending}
+          >
             Next step
           </Button>
         </div>

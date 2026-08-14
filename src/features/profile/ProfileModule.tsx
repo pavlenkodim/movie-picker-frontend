@@ -8,9 +8,9 @@ import SignOutButton from "../auth/components/SignOutButton";
 import { useEffect } from "react";
 import { ApiError } from "@/shared/api/api";
 import { useRouter } from "next/navigation";
-import { GenreWeight } from "./types";
 import useGenres from "@/shared/hooks/useGenres";
 import ProfileSkeleton from "./components/Skeleton";
+import useMyGenres from "@/shared/hooks/useMyGenres";
 
 interface Profile {
   id: number;
@@ -32,10 +32,7 @@ const ProfileModule = () => {
 
   const { data: allGenres, isLoading: isAllGenresLoading } = useGenres();
 
-  const { data: myGenres, isLoading: isGenresLoading } = useQuery({
-    queryKey: ["myGenres"],
-    queryFn: () => apiClient<GenreWeight[]>("genre-weights"),
-  });
+  const { data: myGenres, isLoading: isGenresLoading } = useMyGenres();
 
   useEffect(() => {
     if (error instanceof ApiError && error.status === 404) {
@@ -61,20 +58,26 @@ const ProfileModule = () => {
         </div>
         <h3 className="mb-3 mt-5 text-xl text-center font-bold">You favourite genres</h3>
         <div className="flex justify-center flex-wrap gap-3">
-          {myGenres?.map((genre) => (
-            <Button
-              key={genre.id.toString() + genre.genreId}
-              variant="secondary"
-              size="medium"
-              className="relative overflow-hidden"
-            >
-              <span
-                className={`absolute left-0 z-0 h-full bg-foreground/20 rounded-r-xl`}
-                style={{ width: genre.weight * 100 + "%" }}
-              ></span>
-              {allGenres?.find((g) => g.id === genre.genreId)?.name}
-            </Button>
-          ))}
+          {myGenres?.map((genre) => {
+            const genreWeight = genre.weight * 100;
+            return (
+              <Button
+                key={genre.id.toString() + genre.genreId}
+                variant="secondary"
+                size="medium"
+                className="relative overflow-hidden"
+              >
+                <span
+                  className={`absolute left-0 z-0 h-full bg-foreground/20 rounded-r-xl`}
+                  style={{ width: genreWeight.toFixed() + "%" }}
+                ></span>
+                <div className="flex flex-col gap-0">
+                  {allGenres?.find((g) => g.id === genre.genreId)?.name}
+                  <span className="text-xs">{genreWeight.toFixed()} %</span>
+                </div>
+              </Button>
+            );
+          })}
         </div>
       </div>
       <div className="w-full pb-16 flex justify-center">

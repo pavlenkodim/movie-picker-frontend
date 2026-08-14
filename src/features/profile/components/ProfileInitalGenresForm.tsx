@@ -8,6 +8,7 @@ import { GenreWeight } from "../types";
 import Button from "@/shared/ui/Button";
 import { useRouter } from "next/navigation";
 import Checkbox from "@/shared/ui/Checkbox";
+import { useNotification } from "@/shared/hooks/useNotification";
 
 type InitialGenresFormValues = {
   genreIds: number[];
@@ -32,9 +33,14 @@ const Skeleton = () => {
 
 const ProfileInitalGenresForm = () => {
   const router = useRouter();
-  const { data: allGenres, isLoading, isError } = useGenres();
+  const { data: allGenres, isLoading } = useGenres();
+  const { notify } = useNotification();
 
-  const { register, handleSubmit } = useForm<InitialGenresFormValues>({});
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<InitialGenresFormValues>({});
 
   const { mutate, isPending } = useMutation({
     mutationFn: async (data: InitialGenresFormValues) => {
@@ -43,12 +49,12 @@ const ProfileInitalGenresForm = () => {
         body: data,
       });
     },
-    onSuccess: (data) => {
-      console.log("Successfully submitted genres:", data);
+    onSuccess: () => {
+      notify("success", "You have successfully selected your favourite genres.");
       router.push("/movies");
     },
     onError: (error) => {
-      console.error("Error submitting genres:", error);
+      notify("error", error.message);
     },
   });
 
@@ -72,6 +78,9 @@ const ProfileInitalGenresForm = () => {
               />
             ))}
           </div>
+          {errors.root && (
+            <div className="text-red-500 text-sm mt-5 mb-5 text-center">{errors.root.message}</div>
+          )}
         </div>
         <Button
           type="submit"

@@ -9,11 +9,13 @@ import { LoginFormValues, loginSchema } from "../schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useLogin } from "../hooks/useLogin";
 import { Eye, EyeClosed } from "lucide-react";
+import { useNotification } from "@/shared/hooks/useNotification";
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
   const { mutate: login, isPending } = useLogin();
+  const { notify } = useNotification();
 
   const {
     register,
@@ -31,9 +33,11 @@ const LoginForm = () => {
   const onSubmit = async (data: LoginFormValues) => {
     login(data, {
       onSuccess: () => {
+        notify("success", "You have successfully logged into your account.");
         router.push("/movies");
       },
       onError: (error) => {
+        notify("error", error.message);
         setError("root", { message: error.message });
       },
     });
@@ -67,15 +71,25 @@ const LoginForm = () => {
           />
         </div>
         <div className="flex gap-4">
-          <Button variant="primary" type="submit" className="w-full" loading={isPending}>
+          <Button
+            variant="primary"
+            size="large"
+            type="submit"
+            className="w-full font-normal"
+            loading={isPending}
+          >
             Sign In
           </Button>
-          <Link
-            href="/"
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a]"
+          <Button
+            onClick={() => router.push("/")}
+            variant="secondary"
+            size="large"
+            type="button"
+            className="w-full font-normal"
+            disabled={isPending}
           >
             Cancel
-          </Link>
+          </Button>
         </div>
         <div className="mt-4 text-center">
           <Link href="auth/forgot-password" className="text-sm hover:underline">

@@ -1,13 +1,12 @@
 "use client";
 
 import GlassArea from "@/shared/ui/GlassArea";
-import { Clapperboard, Compass, Heart, User } from "lucide-react";
+import { Clapperboard, Heart, User } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const LINKS = [
   { href: "/movies", icon: Clapperboard },
-  { href: "/", icon: Compass },
   { href: "/history", icon: Heart },
   { href: "/profile", icon: User },
 ];
@@ -24,7 +23,7 @@ const NavbarModule = () => {
   }
 
   return (
-    <GlassArea className="fixed bottom-2 left-1/2 -translate-x-1/2 w-[90%] max-w-[448px] h-16 rounded-full flex items-center justify-around px-4 z-50 shadow-2xl">
+    <GlassArea className="fixed bottom-2 left-1/2 -translate-x-1/2 w-[90%] max-w-md h-16 rounded-full flex items-center justify-around px-4 z-50 shadow-2xl">
       {LINKS.map(({ href, icon: Icon }) => {
         const isActive = pathname === href;
         return (

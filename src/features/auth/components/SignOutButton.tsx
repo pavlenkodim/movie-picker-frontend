@@ -10,7 +10,7 @@ const SignOutButton = ({ className, ...props }: React.ButtonHTMLAttributes<HTMLB
     <Button
       variant="danger"
       size="large"
-      className={cn("w-full max-w-[448px]", className)}
+      className={cn("w-full max-w-md", className)}
       onClick={() => signOut({ callbackUrl: "/" })}
       {...props}
     >
