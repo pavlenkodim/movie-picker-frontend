@@ -1,6 +1,6 @@
 {
   "name": "movie-picker-frontend",
-  "version": "0.1.1-alfa",
+  "version": "0.1.1-dev",
   "private": true,
   "scripts": {
     "dev": "next dev",
