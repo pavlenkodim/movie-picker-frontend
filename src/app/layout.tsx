@@ -5,6 +5,7 @@ import "./globals.css";
 import Providers from "@/shared/providers";
 import { getServerSession } from "next-auth";
 import { options } from "./api/auth/[...nextauth]/options";
+import NotificationContainer from "@/shared/ui/NotificationContainer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -46,6 +47,7 @@ export default async function RootLayout({
     <html lang="en" suppressHydrationWarning data-lt-installed="true">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased h-[95vh]`}>
         <Providers session={session}>{children}</Providers>
+        <NotificationContainer />
       </body>
     </html>
   );

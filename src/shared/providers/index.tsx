@@ -5,6 +5,7 @@ import { Session } from "next-auth";
 import { SessionProvider, signOut } from "next-auth/react";
 import { ReactNode, useState } from "react";
 import { AuthError } from "@/shared/api/api";
+import { useNotification } from "../hooks/useNotification";
 
 export default function Providers({
   session,
@@ -13,6 +14,7 @@ export default function Providers({
   session: Session | null;
   children: ReactNode;
 }) {
+  const { notify } = useNotification();
   const [queryClient] = useState(
     () =>
       new QueryClient({
@@ -27,6 +29,7 @@ export default function Providers({
         },
         queryCache: new QueryCache({
           onError: (error) => {
+            // notify("error", error.message);
             if (error instanceof AuthError) {
               signOut({ callbackUrl: "/auth?tab=login" });
             }
@@ -34,6 +37,7 @@ export default function Providers({
         }),
         mutationCache: new MutationCache({
           onError: (error) => {
+            // notify("error", error.message);
             if (error instanceof AuthError) {
               signOut({ callbackUrl: "/auth?tab=login" });
             }

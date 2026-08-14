@@ -8,6 +8,7 @@ import { GenreWeight } from "../types";
 import Button from "@/shared/ui/Button";
 import { useRouter } from "next/navigation";
 import Checkbox from "@/shared/ui/Checkbox";
+import { useNotification } from "@/shared/hooks/useNotification";
 
 type InitialGenresFormValues = {
   genreIds: number[];
@@ -33,6 +34,7 @@ const Skeleton = () => {
 const ProfileInitalGenresForm = () => {
   const router = useRouter();
   const { data: allGenres, isLoading } = useGenres();
+  const { notify } = useNotification();
 
   const {
     register,
@@ -49,10 +51,11 @@ const ProfileInitalGenresForm = () => {
       });
     },
     onSuccess: () => {
+      notify("success", "You have successfully selected your favourite genres.");
       router.push("/movies");
     },
     onError: (error) => {
-      setError("root", { message: error.message });
+      notify("error", error.message);
     },
   });
 

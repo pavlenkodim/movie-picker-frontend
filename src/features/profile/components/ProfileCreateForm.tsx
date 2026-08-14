@@ -13,9 +13,11 @@ import ProfileThumbnail from "./ProfileThumbnail";
 import { ArrowRight, Camera } from "lucide-react";
 import Button from "@/shared/ui/Button";
 import { useRef, useState } from "react";
+import { useNotification } from "@/shared/hooks/useNotification";
 
 const ProfileCreateForm = () => {
   const { update } = useSession();
+  const { notify } = useNotification();
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [preview, setPreview] = useState<string | null>(null);
@@ -55,10 +57,12 @@ const ProfileCreateForm = () => {
     },
     onSuccess: async (result) => {
       await update({ token: result.token, profileId: result.profile.id });
+      notify("success", "You have successfully create your profile.");
+      notify("info", "Please select the genres you like.");
       router.push("/profile/initial-genres");
     },
     onError: (error) => {
-      setError("root", { message: error.message });
+      notify("error", error.message);
     },
   });
 
@@ -99,7 +103,9 @@ const ProfileCreateForm = () => {
             {...register("nickname")}
           />
 
-          {errors.root && <p className="text-red-500 text-sm mt-5">{errors.root.message}</p>}
+          {errors.root && (
+            <p className="text-red-500 text-sm mt-5 text-center">{errors.root.message}</p>
+          )}
         </div>
 
         <Button type="submit" variant="primary" size="large" className="w-full" loading={isPending}>

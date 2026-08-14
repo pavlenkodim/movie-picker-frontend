@@ -9,11 +9,13 @@ import { LoginFormValues, loginSchema } from "../schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useLogin } from "../hooks/useLogin";
 import { Eye, EyeClosed } from "lucide-react";
+import { useNotification } from "@/shared/hooks/useNotification";
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
   const { mutate: login, isPending } = useLogin();
+  const { notify } = useNotification();
 
   const {
     register,
@@ -31,9 +33,11 @@ const LoginForm = () => {
   const onSubmit = async (data: LoginFormValues) => {
     login(data, {
       onSuccess: () => {
+        notify("success", "You have successfully logged into your account.");
         router.push("/movies");
       },
       onError: (error) => {
+        notify("error", error.message);
         setError("root", { message: error.message });
       },
     });

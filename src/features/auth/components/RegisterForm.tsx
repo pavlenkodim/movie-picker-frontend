@@ -8,12 +8,14 @@ import { useForm } from "react-hook-form";
 import { RegisterFormValues, registerSchema } from "../schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
+import { useNotification } from "@/shared/hooks/useNotification";
 
 const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const { mutate: registration, isPending } = useRegister();
+  const { notify } = useNotification();
   const router = useRouter();
 
   const {
@@ -33,9 +35,12 @@ const RegisterForm = () => {
   const onSubmit = async (data: RegisterFormValues) => {
     registration(data, {
       onSuccess: () => {
+        notify("success", "You have successfully created your account.");
+        notify("info", "Please enter your nickname.");
         router.push("/profile/create");
       },
       onError: (error) => {
+        notify("error", error.message);
         setError("root", { message: error.message });
       },
     });
