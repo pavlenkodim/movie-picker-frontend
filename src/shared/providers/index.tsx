@@ -5,7 +5,7 @@ import { Session } from "next-auth";
 import { SessionProvider, signOut } from "next-auth/react";
 import { ReactNode, useState } from "react";
 import { AuthError } from "@/shared/api/api";
-import { useNotification } from "../hooks/useNotification";
+// import { useNotification } from "../hooks/useNotification";
 
 export default function Providers({
   session,
@@ -14,7 +14,7 @@ export default function Providers({
   session: Session | null;
   children: ReactNode;
 }) {
-  const { notify } = useNotification();
+  // const { notify } = useNotification();
   const [queryClient] = useState(
     () =>
       new QueryClient({

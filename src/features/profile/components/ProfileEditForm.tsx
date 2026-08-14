@@ -34,7 +34,6 @@ const ProfileEditForm = () => {
   const {
     register,
     handleSubmit,
-    setError,
     formState: { errors },
   } = useForm<ProfileFormValues>({
     resolver: zodResolver(profileSchema),
