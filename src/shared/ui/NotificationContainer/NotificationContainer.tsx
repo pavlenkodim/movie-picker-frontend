@@ -9,7 +9,7 @@ const NotificationContainer = () => {
   const removeNotification = useNotificationStore((s) => s.removeNotification);
 
   return (
-    <div className="fixed top-4 right-4 left-4 z-50 flex flex-col-reverse gap-2">
+    <div className="fixed top-4 right-4 left-4 md:left-auto z-50 flex flex-col-reverse gap-2">
       <AnimatePresence>
         {notifications.map((n) => (
           <motion.div
