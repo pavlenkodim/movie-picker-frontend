@@ -9,10 +9,12 @@ import Button from "@/shared/ui/Button";
 import { useRouter } from "next/navigation";
 import Checkbox from "@/shared/ui/Checkbox";
 import { useNotification } from "@/shared/hooks/useNotification";
+import z from "zod";
+import { initialGenresSchema } from "../schemas";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-type InitialGenresFormValues = {
-  genreIds: number[];
-};
+type GenreIdsInput = z.input<typeof initialGenresSchema>;
+type GenreIdsPayload = z.output<typeof initialGenresSchema>;
 
 const Skeleton = () => {
   return (
@@ -40,11 +42,17 @@ const ProfileInitalGenresForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<InitialGenresFormValues>({});
+  } = useForm<GenreIdsInput, unknown, GenreIdsPayload>({
+    resolver: zodResolver(initialGenresSchema),
+    defaultValues: {
+      genreIds: [],
+    },
+  });
 
   const { mutate, isPending } = useMutation({
-    mutationFn: async (data: InitialGenresFormValues) => {
-      return await apiClient<GenreWeight[], InitialGenresFormValues>("genre-weights", {
+    mutationFn: async (data: GenreIdsPayload) => {
+      console.log("data", data);
+      return await apiClient<GenreWeight[], GenreIdsPayload>("genre-weights", {
         method: "POST",
         body: data,
       });

@@ -16,3 +16,7 @@ export const profileSchema = z.object({
 });
 
 export type ProfileFormValues = z.infer<typeof profileSchema>;
+
+export const initialGenresSchema = z.object({
+  genreIds: z.array(z.coerce.number().int().positive()).min(1, "Choose at least one genre"),
+});

@@ -1,7 +1,7 @@
 const HistorySkeleton = () => {
   return (
     <div className="grid grid-cols-3 gap-2 justify-center pb-20">
-      {Array.from({ length: 8 }).map((_, index) => (
+      {Array.from({ length: 9 }).map((_, index) => (
         <div
           key={index}
           className="aspect-2/3 rounded-lg overflow-hidden relative bg-zinc-200/70 dark:bg-zinc-800/80 animate-pulse"
