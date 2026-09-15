@@ -6,6 +6,7 @@ import MovieInfo from "@/features/movies/components/MovieInfo";
 import { BASE_IMAGE_URL } from "@/shared/constants";
 import MovieCardSkeleton from "@/features/movies/components/Skeleton";
 import { cn } from "@/shared/libs/utils";
+import { useEffect, useState } from "react";
 
 const HistoryMovieCardDetails = ({
   swipeId,
@@ -16,6 +17,15 @@ const HistoryMovieCardDetails = ({
 }) => {
   const { data: swipe, isLoading } = useHistoryDetails(Number(swipeId));
   const { movie } = swipe || {};
+  const [isOpenInfo, setIsOpenInfo] = useState(false);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setIsOpenInfo(true);
+    }, 3000);
+
+    return () => clearTimeout(timeoutId);
+  }, []);
 
   if (isLoading) return <MovieCardSkeleton className="p-0 md:p-0" />;
 
@@ -41,8 +51,10 @@ const HistoryMovieCardDetails = ({
       <div className="absolute inset-0 bg-linear-to-t from-white/80 via-white/20 dark:from-black/80 dark:via-black/20 to-transparent" />
       <MovieInfo
         movie={movie}
-        isOpen={true}
-        onToggle={() => {}}
+        isOpen={isOpenInfo}
+        onToggle={() => {
+          setIsOpenInfo(!isOpenInfo);
+        }}
         isHistory={true}
         isLiked={swipe.liked}
       />
