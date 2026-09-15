@@ -6,8 +6,7 @@ import Picture from "@/shared/ui/Picture";
 import { Heart, X } from "lucide-react";
 import { useState } from "react";
 import MovieInfo from "./MovieInfo";
-
-const BASE_IMAGE_URL = "https://image.tmdb.org/t/p/w500";
+import { BASE_IMAGE_URL } from "@/shared/constants";
 
 interface MovieCardProps {
   movie: Movie;

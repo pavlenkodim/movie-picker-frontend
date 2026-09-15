@@ -8,10 +8,10 @@ import HistoryMovieCard from "./components/HistoryMovieCard";
 import HistorySkeleton from "./components/Skeleton";
 import { LoaderCircle } from "lucide-react";
 
-interface HistoryData extends SwipeResponse {
+export interface HistoryData extends SwipeResponse {
   movie: Movie;
 }
-interface HistoryResponce {
+export interface HistoryResponce {
   data: HistoryData[];
   meta: { nextCursor: number | null; hasMore: boolean };
 }
@@ -45,7 +45,7 @@ const HistoryModule = () => {
     <div className="pb-20">
       <div className="grid grid-cols-3 gap-2 justify-center">
         {swipes.map((swipe) => (
-          <HistoryMovieCard key={swipe.id} movie={swipe.movie} liked={swipe.liked} />
+          <HistoryMovieCard key={swipe.id} swipe={swipe} />
         ))}
       </div>
 

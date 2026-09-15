@@ -11,8 +11,10 @@ export const metadata: Metadata = {
 
 export default async function AuthorizedLayout({
   children,
+  modal,
 }: Readonly<{
   children: React.ReactNode;
+  modal: React.ReactNode;
 }>) {
   const session = await getServerSession(options);
 
@@ -23,6 +25,7 @@ export default async function AuthorizedLayout({
       <main className="h-full">
         {children}
         <NavbarModule />
+        {modal}
       </main>
     </div>
   );
