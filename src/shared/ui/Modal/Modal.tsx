@@ -3,13 +3,10 @@
 import { useRouter } from "next/navigation";
 import Button from "../Button";
 import { X } from "lucide-react";
-import useLockBodyScroll from "@/shared/hooks/useLockBodyScroll";
 
 const Modal = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
   const onDismiss = () => router.back();
-
-  useLockBodyScroll();
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
