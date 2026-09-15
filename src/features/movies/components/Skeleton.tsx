@@ -1,7 +1,9 @@
-const MovieCardSkeleton = () => {
+import { cn } from "@/shared/libs/utils";
+
+const MovieCardSkeleton = ({ className }: { className?: string }) => {
   return (
-    <div className="relative w-full h-full px-4 md:px-32">
-      <div className="relative w-full h-full rounded-4xl overflow-hidden bg-zinc-200/70 dark:bg-zinc-800/80 animate-pulse">
+    <div className={cn("relative w-full h-full px-4 md:px-32", className)}>
+      <div className="relative w-full h-full rounded-3xl overflow-hidden bg-zinc-200/70 dark:bg-zinc-800/80 animate-pulse">
         <div className="absolute inset-0 bg-linear-to-t from-black/25 via-black/10 to-transparent" />
 
         <div className="absolute inset-x-0 bottom-0 p-6 flex flex-col gap-3">

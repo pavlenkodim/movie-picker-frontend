@@ -13,11 +13,21 @@ interface MovieInfoProps {
   onToggle: () => void;
   onLike?: () => void;
   onDislike?: () => void;
+  isHistory?: boolean;
+  isLiked?: boolean;
 }
 
 const DRAG_THRESHOLD = 50;
 
-const MovieInfo = ({ movie, isOpen, onToggle, onLike, onDislike }: MovieInfoProps) => {
+const MovieInfo = ({
+  movie,
+  isOpen,
+  onToggle,
+  onLike,
+  onDislike,
+  isHistory,
+  isLiked,
+}: MovieInfoProps) => {
   const y = useMotionValue(0);
 
   const handleDragEnd = (_: never, info: PanInfo) => {
@@ -50,23 +60,35 @@ const MovieInfo = ({ movie, isOpen, onToggle, onLike, onDislike }: MovieInfoProp
         style={{ y, touchAction: "none" }}
         onDragEnd={handleDragEnd}
       >
-        <div className="w-full p-3 flex justify-between z-10">
-          <Button
-            className="bg-white/60 hover:bg-white/80 backdrop-blur-sm dark:text-black dark:hover:bg-white/80 p-3"
-            variant="secondary"
-            onClick={onDislike}
-          >
-            <X size={32} />
-          </Button>
+        {isHistory ? (
+          <div className="w-full p-3 flex justify-center z-10">
+            <Button
+              className="bg-white/60 hover:bg-white/80 backdrop-blur-sm dark:text-black dark:hover:bg-white/80 p-3"
+              variant="secondary"
+              onClick={onDislike}
+            >
+              {isLiked ? <Heart size={32} /> : <X size={32} />}
+            </Button>
+          </div>
+        ) : (
+          <div className="w-full p-3 flex justify-between z-10">
+            <Button
+              className="bg-white/60 hover:bg-white/80 backdrop-blur-sm dark:text-black dark:hover:bg-white/80 p-3"
+              variant="secondary"
+              onClick={onDislike}
+            >
+              <X size={32} />
+            </Button>
 
-          <Button
-            className="bg-white/60 hover:bg-white/80 backdrop-blur-sm dark:text-black dark:hover:bg-white/80 p-3"
-            variant="secondary"
-            onClick={onLike}
-          >
-            <Heart size={32} />
-          </Button>
-        </div>
+            <Button
+              className="bg-white/60 hover:bg-white/80 backdrop-blur-sm dark:text-black dark:hover:bg-white/80 p-3"
+              variant="secondary"
+              onClick={onLike}
+            >
+              <Heart size={32} />
+            </Button>
+          </div>
+        )}
         <GlassArea
           className={cn(
             "w-full overflow-y-auto p-6 pb-8 border-b-0 rounded-3xl z-20 transition-all duration-300",
