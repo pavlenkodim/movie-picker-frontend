@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { ProfileFormValues, profileSchema } from "../schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useSession } from "next-auth/react";
 import { apiClient } from "@/shared/api/api";
 import { Profile } from "../types";
 import ProfileThumbnail from "./ProfileThumbnail";
@@ -16,8 +15,6 @@ import { useRef, useState } from "react";
 import { useNotification } from "@/shared/hooks/useNotification";
 
 const ProfileEditForm = () => {
-  const session = useSession();
-  const userId = session.data?.user.id;
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [localPreview, setLocalPreview] = useState<string | null>(null);
@@ -55,19 +52,19 @@ const ProfileEditForm = () => {
   const { mutate, isPending } = useMutation({
     mutationFn: async (data: ProfileFormValues) => {
       const formData = new FormData();
-      formData.append("userId", String(userId));
       formData.append("nickname", data.nickname);
       if (data.thumbnail?.[0]) {
         formData.append("thumbnail", data.thumbnail[0]);
       }
       const result = await apiClient<Profile>("profiles", {
-        method: "POST",
+        method: "PATCH",
         body: formData,
       });
 
       return result;
     },
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["profile"] });
       notify("success", "You have successfully edited your account.");
       router.push("/profile");
     },
