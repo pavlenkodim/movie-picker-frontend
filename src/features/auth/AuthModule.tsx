@@ -2,6 +2,7 @@
 
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
+import GoogleSignInButton from "./components/GoogleSignInButton";
 import Button from "@/shared/ui/Button/Button";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -43,6 +44,12 @@ const AuthModule = () => {
         // error={loginMutation.error?.message}
         />
       )}
+      <div className="flex items-center gap-4 my-4">
+        <div className="h-px flex-1 bg-foreground/20" />
+        <span className="text-sm text-foreground/60">or</span>
+        <div className="h-px flex-1 bg-foreground/20" />
+      </div>
+      <GoogleSignInButton callbackUrl="/movies" />
     </div>
   );
 };

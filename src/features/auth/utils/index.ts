@@ -17,3 +17,7 @@ export async function signInWithCredentials(
 
   return result;
 }
+
+export async function signInWithGoogle(callbackUrl: string = "/movies") {
+  return await signIn("google", { callbackUrl });
+}
