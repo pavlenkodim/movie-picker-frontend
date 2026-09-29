@@ -37,6 +37,22 @@ export const options: NextAuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      // Exchange Google's id_token for our backend user + JWT.
+      // Throwing here makes NextAuth redirect to pages.error.
+      async profile(_profile, tokens) {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/google`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ idToken: tokens.id_token }),
+        });
+
+        const data = await res.json().catch(() => null);
+        if (!res.ok || !data?.user) {
+          throw new Error(data?.message ?? `Google auth failed with status ${res.status}`);
+        }
+
+        return { ...data.user, token: data.token };
+      },
     }),
 
     // GithubProvider({
