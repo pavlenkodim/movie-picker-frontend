@@ -1,7 +1,7 @@
 "use client";
 
 import Input from "@/shared/ui/Input";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { ProfileFormValues, profileSchema } from "../schemas";
@@ -19,6 +19,7 @@ const ProfileCreateForm = () => {
   const { update } = useSession();
   const { notify } = useNotification();
   const router = useRouter();
+  const queryClient = useQueryClient();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [preview, setPreview] = useState<string | null>(null);
 
@@ -56,6 +57,7 @@ const ProfileCreateForm = () => {
     },
     onSuccess: async (result) => {
       await update({ token: result.token, profileId: result.profile.id });
+      await queryClient.invalidateQueries({ queryKey: ["profile"] });
       notify("success", "You have successfully create your profile.");
       notify("info", "Please select the genres you like.");
       router.push("/profile/initial-genres");

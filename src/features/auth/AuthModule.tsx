@@ -2,13 +2,28 @@
 
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
+import GoogleSignInButton from "./components/GoogleSignInButton";
 import Button from "@/shared/ui/Button/Button";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useRef } from "react";
+import { useNotification } from "@/shared/hooks/useNotification";
 
 const AuthModule = () => {
-  const { push } = useRouter();
+  const { push, replace } = useRouter();
   const searchParams = useSearchParams();
   const currentTab = searchParams.get("tab");
+  const authError = searchParams.get("error");
+  const { notify } = useNotification();
+  const errorShown = useRef(false);
+
+  // NextAuth redirects OAuth failures here with ?error=...
+  useEffect(() => {
+    if (!authError || errorShown.current) return;
+    errorShown.current = true;
+    notify("error", "Sign in with Google failed. Please try again.");
+    replace("?tab=login");
+  }, [authError, notify, replace]);
 
   return (
     <div className="w-full h-full">
@@ -43,6 +58,23 @@ const AuthModule = () => {
         // error={loginMutation.error?.message}
         />
       )}
+      <div className="flex items-center gap-4 my-4">
+        <div className="h-px flex-1 bg-foreground/20" />
+        <span className="text-sm text-foreground/60">or</span>
+        <div className="h-px flex-1 bg-foreground/20" />
+      </div>
+      <GoogleSignInButton callbackUrl="/movies" />
+      <p className="mt-4 text-center text-xs text-foreground/60">
+        By continuing, you agree to our{" "}
+        <Link href="/terms" target="_blank" className="underline underline-offset-2">
+          Terms of Use
+        </Link>{" "}
+        and acknowledge our{" "}
+        <Link href="/privacy" target="_blank" className="underline underline-offset-2">
+          Privacy Policy
+        </Link>
+        .
+      </p>
     </div>
   );
 };

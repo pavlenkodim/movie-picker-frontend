@@ -2,6 +2,7 @@
 import { Headset } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { SUPPORT_TELEGRAM_URL } from "@/shared/constants";
 
 interface HeaderProps extends React.HTMLProps<HTMLDivElement> {
   left?: React.ReactNode;
@@ -18,7 +19,7 @@ const Header = ({ left, center, right }: HeaderProps) => {
         <span className="flex">
           {left ?? (
             <Link
-              href={`https://t.me/pavlenkodim99?text=Hello,%20I%20need%20some%20help%20with%20your%20application:%20Filmder`}
+              href={`${SUPPORT_TELEGRAM_URL}?text=Hello,%20I%20need%20some%20help%20with%20your%20application:%20Filmder`}
               target="_blank"
             >
               <Headset />

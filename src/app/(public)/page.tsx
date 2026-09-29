@@ -28,18 +28,18 @@ export default async function Home() {
         <div className="max-w-md mx-auto">
           <div className="mb-8 inline-block">
             <span className="px-4 py-2 rounded-full bg-black/5 dark:bg-white/5 border border-black/20 dark:border-white/20   text-sm font-medium">
-              Find Your Next Movie
+              Movie discovery, one swipe at a time
             </span>
           </div>
 
           <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight  ">
-            Swipe Movies Like
-            <span className="block">Tinder</span>
+            Find movies
+            <span className="block">you&apos;ll love</span>
           </h2>
 
           <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
-            Tired of endless scrolling? Just swipe through movies and shows to find the perfect one
-            for tonight
+            Tired of endless scrolling? Swipe, save and discover movies that match your taste — and
+            find the perfect one for tonight
           </p>
 
           <Link
@@ -63,7 +63,7 @@ export default async function Home() {
               <div>
                 <h4 className="text-xl font-bold mb-2">Tell Us Your Taste</h4>
                 <p className="text-gray-600 dark:text-gray-400">
-                  Pick your favorite genres, mood, and streaming platform
+                  Pick the genres you enjoy to get your first recommendations
                 </p>
               </div>
             </div>
@@ -75,7 +75,7 @@ export default async function Home() {
               <div>
                 <h4 className="text-xl font-bold mb-2">Swipe Left or Right</h4>
                 <p className="text-gray-600 dark:text-gray-400">
-                  Love it? Swipe right Nope? Swipe left Just like Tinder!
+                  Love it? Swipe right. Not for you? Swipe left. Every swipe sharpens your picks
                 </p>
               </div>
             </div>
@@ -87,7 +87,7 @@ export default async function Home() {
               <div>
                 <h4 className="text-xl font-bold mb-2">Watch & Enjoy</h4>
                 <p className="text-gray-600 dark:text-gray-400">
-                  Get personalized recommendations that you and your partner will love
+                  Get personalized recommendations and keep every movie you liked in your history
                 </p>
               </div>
             </div>
@@ -103,21 +103,21 @@ export default async function Home() {
             <div className="p-6 rounded-2xl bg-white dark:bg-black border border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 transition">
               <h4 className="text-lg font-bold mb-2">Quick Decisions</h4>
               <p className="text-gray-600 dark:text-gray-400 text-sm">
-                Find the perfect movie in just 2 minutes
+                Find something to watch in minutes, not hours
               </p>
             </div>
 
             <div className="p-6 rounded-2xl bg-white dark:bg-black border border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 transition">
-              <h4 className="text-lg font-bold mb-2">For Couples</h4>
+              <h4 className="text-lg font-bold mb-2">Your Movie History</h4>
               <p className="text-gray-600 dark:text-gray-400 text-sm">
-                Find common ground and match on movies you both love
+                Every swipe is saved, so you can always come back to the movies you liked
               </p>
             </div>
 
             <div className="p-6 rounded-2xl bg-white dark:bg-black border border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 transition">
               <h4 className="text-lg font-bold mb-2">Smart Recommendations</h4>
               <p className="text-gray-600 dark:text-gray-400 text-sm">
-                Our algorithm learns your preferences
+                Recommendations adapt to your taste with every swipe
               </p>
             </div>
 
@@ -135,7 +135,7 @@ export default async function Home() {
         <div className="max-w-md mx-auto text-center">
           <h3 className="text-3xl font-bold mb-4">Ready for Movie Night?</h3>
           <p className="text-gray-600 dark:text-gray-400 mb-8">
-            Join thousands of people who already found their perfect movies
+            Create a free account and start discovering movies in under a minute
           </p>
 
           <Link
@@ -154,7 +154,19 @@ export default async function Home() {
       <footer className="py-8 px-6 border-t border-black/10 dark:border-white/10 text-center text-gray-600 dark:text-gray-400 text-sm pb-20">
         <div className="max-w-md mx-auto">
           <p>Making movie night decisions easy.</p>
+          <nav className="flex justify-center gap-4 my-3">
+            <Link href="/privacy" className="hover:text-foreground transition">
+              Privacy Policy
+            </Link>
+            <Link href="/terms" className="hover:text-foreground transition">
+              Terms of Use
+            </Link>
+          </nav>
           <p>© 2026 Filmder v{appVersion}</p>
+          <p className="mt-3 text-xs text-gray-500 dark:text-gray-500">
+            Movie data and images provided by TMDB. This product uses the TMDB API but is not
+            endorsed or certified by TMDB.
+          </p>
         </div>
       </footer>
     </div>

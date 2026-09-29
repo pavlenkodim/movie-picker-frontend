@@ -2,7 +2,7 @@
 
 import { apiClient } from "@/shared/api/api";
 import useGenres from "@/shared/hooks/useGenres";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { GenreWeight } from "../types";
 import Button from "@/shared/ui/Button";
@@ -35,6 +35,7 @@ const Skeleton = () => {
 
 const ProfileInitalGenresForm = () => {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const { data: allGenres, isLoading } = useGenres();
   const { notify } = useNotification();
 
@@ -57,7 +58,8 @@ const ProfileInitalGenresForm = () => {
         body: data,
       });
     },
-    onSuccess: () => {
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["myGenres"] });
       notify("success", "You have successfully selected your favourite genres.");
       router.push("/movies");
     },

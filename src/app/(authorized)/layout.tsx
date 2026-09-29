@@ -6,7 +6,7 @@ import NavbarModule from "@/features/navbar/NavbarModule";
 
 export const metadata: Metadata = {
   title: "Filmder",
-  description: "Like Tinder, but for movies.",
+  description: "Find movies you'll love.",
 };
 
 export default async function AuthorizedLayout({
