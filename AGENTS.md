@@ -17,7 +17,7 @@ data of its own and does nothing useful without the backend
 | Concern            | Choice                                                            |
 | ------------------ | --------------------------------------------------------------------|
 | Framework          | Next.js 16 (App Router), React 19, TypeScript 5 (`strict`)          |
-| Auth               | NextAuth v4 — credentials provider, JWT session strategy (24h)      |
+| Auth               | NextAuth v4 — credentials + Google providers, JWT session (24h)     |
 | Server state       | TanStack React Query v5                                            |
 | Client state       | Zustand v5 — ephemeral UI mechanics only, never server data        |
 | Forms / validation | React Hook Form + Zod (`@hookform/resolvers/zod`)                  |
@@ -35,7 +35,8 @@ npm run lint     # eslint (flat config, eslint-config-next core-web-vitals + typ
 ```
 
 There is **no test suite** and **no CI** in this repo. "Verify" means: `npm run lint`
-passes and `npm run build` completes without type errors.
+passes and `npm run build` completes without type errors. Next.js 16 requires
+Node ≥ 20.9 for `next build`.
 
 ## Environment
 
@@ -46,6 +47,11 @@ Copy `example.env` to `.env.local` and fill in:
 | `NEXT_PUBLIC_BACKEND_URL` | Base URL of the backend. Falls back to `http://localhost:3001`.       |
 | `NEXTAUTH_SECRET`         | Signs NextAuth JWTs. Required in production.                          |
 | `NEXTAUTH_URL`            | Canonical frontend URL. Required outside local dev.                  |
+| `GOOGLE_CLIENT_ID`        | Google OAuth client. **Must match the backend's `GOOGLE_CLIENT_ID`** (it is the `id_token` audience). |
+| `GOOGLE_CLIENT_SECRET`    | Google OAuth client secret.                                           |
+
+Google Cloud Console must list `<NEXTAUTH_URL>/api/auth/callback/google` as an
+authorized redirect URI.
 
 `.env*` is git-ignored.
 
@@ -125,8 +131,8 @@ queue, also not server data.
 ## Data fetching — `shared/api/api.ts`
 
 `apiClient` is the single HTTP entry point. Nothing else should call `fetch`
-directly (the NextAuth `authorize` callback in `options.ts` is the one deliberate
-exception, since it runs before a session exists).
+directly (the NextAuth credentials `authorize` and Google `profile` callbacks in
+`options.ts` are the deliberate exceptions, since they run before a session exists).
 
 ```ts
 apiClient<TResponse, TBody = undefined>(
@@ -163,6 +169,17 @@ if used across features. Conventions seen in the codebase:
 
 - Config: `src/app/api/auth/[...nextauth]/options.ts`. Credentials provider posts to
   `${NEXT_PUBLIC_BACKEND_URL}/api/auth/login` and stores `{ ...user, token }`.
+- **Google:** `GoogleProvider.profile()` posts Google's `id_token` to
+  `/api/auth/google`; the backend verifies it, finds/creates/links the user, **always
+  creates a profile** (nickname + avatar from Google), and returns the same
+  `{ token, user }` shape as `/login`, so the `jwt`/`session` callbacks are shared.
+  On a non-2xx response `profile()` throws → NextAuth redirects to `pages.error`
+  (`/auth?tab=login&error=...`), where `AuthModule` shows an error toast and strips
+  the param. UI: `features/auth/components/GoogleSignInButton` →
+  `useGoogleLogin` → `signInWithGoogle(callbackUrl)` in `features/auth/utils`.
+- Backend merge rule: signing in with Google on an existing email/password account
+  links `googleId` and **drops the password**; `/login` then answers
+  "This account uses Google sign-in".
 - The backend JWT and profile data are carried on the NextAuth token/session via the
   `jwt` and `session` callbacks. Type augmentation is in `next-auth.d.ts`
   (`session.token`, `session.user.profileId`, `banned`, `roles`, ...).
@@ -176,6 +193,29 @@ if used across features. Conventions seen in the codebase:
 - **Known staleness:** `banned` / `roles` are baked into the JWT at login and only
   refresh on re-login or token expiry (24h). A mid-session ban won't take effect
   immediately.
+
+### Onboarding guard
+
+Onboarding order is `/profile/create` → `/profile/initial-genres` → `/movies`.
+Besides the page-level bounces above, `features/navbar/NavbarModule` (mounted once in
+the authorized layout) enforces it client-side:
+
+- `["profile"]` (`profiles/me`) fails with `ApiError` 404 → `replace("/profile/create")`.
+- `["myGenres"]` (`genre-weights`, enabled only once a profile exists) is empty or
+  404 → `replace("/profile/initial-genres")`.
+- Skipped on the onboarding pages themselves (`EXCLUDE_LIST`); other errors
+  (5xx, network) do not redirect.
+
+Rules when touching it:
+
+- React only to **settled** states. `data === undefined` also means "still loading" —
+  treating it as "missing" fires toasts/redirects for every user on every mount.
+- The navbar never remounts between pages, so its cached queries go stale. Mutations
+  that finish an onboarding step (`ProfileCreateForm`, `ProfileInitalGenresForm`)
+  must `await queryClient.invalidateQueries(...)` for `["profile"]` / `["myGenres"]`
+  **before** `router.push`, or the guard bounces the user back.
+- In dev, Strict Mode can still show a duplicate toast when data is already cached
+  at mount; production shows one.
 
 ## UI & styling
 
@@ -252,14 +292,12 @@ committed `.prettierrc`, so keep matching what's already there):
   consider hoisting it to `shared`.
 - `next.config.ts` only allows `image.tmdb.org` under `images.remotePatterns` — any
   new remote image host must be added there.
-- Some commented-out code is intentionally parked (Google/GitHub providers in
+- Some commented-out code is intentionally parked (GitHub provider in
   `options.ts`, actors/trailer UI in `MovieInfo.tsx`, `notify` wiring in
   `shared/providers`). Leave it unless the task is to finish that feature.
 - Pre-existing spelling in identifiers/copy: `AuthResponce`, `HistoryResponce`,
   "Nicname", "You favourite genres". Don't mass-rename as a drive-by; match the
   existing symbol when editing nearby code.
-- `NavbarModule` has a leftover `console.log(pathname)` — safe to remove if you're
-  already editing that file.
 
 ## Making changes
 
