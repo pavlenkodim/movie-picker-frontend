@@ -19,20 +19,20 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Filmder",
-  description: "Swipe through movies and find what you really want to watch.",
+  description: "Find movies you'll love. Swipe, save and discover movies that match your taste.",
   openGraph: {
     siteName: "Filmder",
-    title: "Filmder — Movie Recommendations You'll Actually Want to Watch",
+    title: "Filmder — Find movies you'll love",
     description:
-      "Swipe through movies like Tinder. Filmder learns your genre preferences in real time and builds a personalized queue — perfect for solo nights or deciding together with a partner.",
+      "Swipe, save and discover movies that match your taste. Filmder learns your genre preferences with every swipe and builds a personalized queue for your next movie night.",
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Filmder — Movie Recommendations You'll Actually Want to Watch",
+    title: "Filmder — Find movies you'll love",
     description:
-      "Swipe through movies like Tinder. Filmder learns your genre preferences in real time and builds a personalized queue — perfect for solo nights or deciding together with a partner.",
+      "Swipe, save and discover movies that match your taste. Filmder learns your genre preferences with every swipe and builds a personalized queue for your next movie night.",
   },
 };
 

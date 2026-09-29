@@ -12,7 +12,7 @@ either a pointer into it or a Claude-specific note. Human setup instructions are
 
 ## 30-second orientation
 
-- **Filmder** — Tinder-style movie discovery. Frontend only; needs the
+- **Filmder** — swipe-based movie discovery. Frontend only; needs the
   `movie-picker-app` backend running to do anything.
 - Next.js 16 App Router · React 19 · TypeScript (strict) · NextAuth v4 (JWT;
   credentials + Google) ·

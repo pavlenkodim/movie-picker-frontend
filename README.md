@@ -1,6 +1,6 @@
 # Filmder — Frontend
 
-Tinder-style movie discovery app. Swipe on movies, the backend adjusts your genre
+Movie discovery app. Swipe on movies, the backend adjusts your genre
 preferences after every swipe and returns better-scored recommendations over time.
 
 Backend repo: https://github.com/pavlenkodim/movie-picker-app

@@ -6,7 +6,7 @@ architecture. [CLAUDE.md](CLAUDE.md) points here.
 
 ## What this is
 
-**Filmder** — a Tinder-style movie discovery frontend. The user swipes on movie
+**Filmder** — a swipe-based movie discovery frontend. The user swipes on movie
 cards; the backend re-weights their genre preferences after every swipe and returns
 better-scored recommendations over time. This repo is **frontend only** — it has no
 data of its own and does nothing useful without the backend
@@ -77,14 +77,14 @@ like `../../../shared`.
 ```
 src/
   app/
-    (public)/                     # landing page, /auth — no session required
+    (public)/                     # landing page, /auth, /privacy, /terms — no session required
     (authorized)/                 # /movies, /history, /profile/** — session-gated
     api/auth/[...nextauth]/       # NextAuth route handler + options + type augmentation
     layout.tsx                    # root: fonts, <Providers>, <NotificationContainer>
     globals.css                   # Tailwind v4 entry + theme tokens
     not-found.tsx
   features/
-    auth/       movies/       profile/       history/       navbar/
+    auth/       movies/       profile/       history/       navbar/       legal/
   shared/
     api/        # apiClient + typed errors (the only place fetch() lives)
     hooks/      # cross-feature query hooks (useGenres, useMyGenres, useNotification)

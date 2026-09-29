@@ -4,6 +4,7 @@ import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
 import GoogleSignInButton from "./components/GoogleSignInButton";
 import Button from "@/shared/ui/Button/Button";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { useNotification } from "@/shared/hooks/useNotification";
@@ -63,6 +64,17 @@ const AuthModule = () => {
         <div className="h-px flex-1 bg-foreground/20" />
       </div>
       <GoogleSignInButton callbackUrl="/movies" />
+      <p className="mt-4 text-center text-xs text-foreground/60">
+        By continuing, you agree to our{" "}
+        <Link href="/terms" target="_blank" className="underline underline-offset-2">
+          Terms of Use
+        </Link>{" "}
+        and acknowledge our{" "}
+        <Link href="/privacy" target="_blank" className="underline underline-offset-2">
+          Privacy Policy
+        </Link>
+        .
+      </p>
     </div>
   );
 };
