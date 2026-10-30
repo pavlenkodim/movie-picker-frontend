@@ -11,19 +11,25 @@ export interface Movie {
   voteCount: number;
   popularity: number;
   releaseDate: string;
+  productionCountries: string[];
+  status: string;
+  trailerKey?: string;
   genres: Genre[];
+  cast?: CastMember[];
+  companies?: Company[];
 }
 
 export interface CastMember {
   id: number;
   name: string;
-  photoUrl?: string;
+  profilePath?: string;
 }
 
-export interface Actor {
+export interface Company {
   id: number;
   name: string;
-  photoUrl?: string;
+  logoPath?: string;
+  originCountry?: string;
 }
 
 export interface SessionStat {

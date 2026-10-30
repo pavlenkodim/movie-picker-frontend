@@ -7,6 +7,7 @@ import { BASE_IMAGE_URL } from "@/shared/constants";
 import MovieCardSkeleton from "@/features/movies/components/Skeleton";
 import { cn } from "@/shared/libs/utils";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 const HistoryMovieCardDetails = ({
   swipeId,
@@ -49,6 +50,9 @@ const HistoryMovieCardDetails = ({
         draggable={false}
       />
       <div className="absolute inset-0 bg-linear-to-t from-white/80 via-white/20 dark:from-black/80 dark:via-black/20 to-transparent" />
+      <div className="absolute top-0 left-0 p-4 flex flex-col gap-2">
+        <Image src="/tmdb_logo.svg" width={30} height={15} alt="tmdb" />
+      </div>
       <MovieInfo
         movie={movie}
         isOpen={isOpenInfo}

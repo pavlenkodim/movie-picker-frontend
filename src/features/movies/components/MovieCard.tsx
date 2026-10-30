@@ -7,6 +7,7 @@ import { Heart, X } from "lucide-react";
 import { useState } from "react";
 import MovieInfo from "./MovieInfo";
 import { BASE_IMAGE_URL } from "@/shared/constants";
+import Image from "next/image";
 
 interface MovieCardProps {
   movie: Movie;
@@ -84,6 +85,10 @@ export const MovieCard = ({ movie, onSwipe, isTop }: MovieCardProps) => {
         />
 
         <div className="absolute inset-0 bg-linear-to-t from-white/80 via-white/20 dark:from-black/80 dark:via-black/20 to-transparent" />
+
+        <div className="absolute top-0 left-0 p-4 flex flex-col gap-2">
+          <Image src="/tmdb_logo.svg" width={30} height={15} alt="tmdb" />
+        </div>
 
         <motion.div
           className="absolute top-1/3 right-1/3 p-4 rounded-full bg-white dark:text-black"
