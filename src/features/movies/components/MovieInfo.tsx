@@ -2,10 +2,15 @@
 
 import GlassArea from "@/shared/ui/GlassArea";
 import { Movie } from "../types";
-import { Heart, Star, X } from "lucide-react";
+import { ExternalLink, Heart, Star, X } from "lucide-react";
 import { cn } from "@/shared/libs/utils";
 import { motion, PanInfo, useMotionValue } from "framer-motion";
 import Button from "@/shared/ui/Button";
+import Link from "next/link";
+import { getCountryName } from "@/shared/libs/country";
+import Image from "next/image";
+import { BASE_IMAGE_URL } from "@/shared/constants";
+import Picture from "@/shared/ui/Picture";
 
 interface MovieInfoProps {
   movie: Movie;
@@ -46,7 +51,7 @@ const MovieInfo = ({
   return (
     <motion.div
       className="w-full touch-none overscroll-none"
-      animate={{ y: isOpen ? 0 : 130 }}
+      animate={{ y: isOpen ? 0 : 180 }}
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
     >
       <motion.div
@@ -91,8 +96,8 @@ const MovieInfo = ({
         )}
         <GlassArea
           className={cn(
-            "w-full overflow-y-auto p-6 pb-8 border-b-0 rounded-3xl z-20 transition-all duration-300",
-            !isOpen && "bg-transparent dark:bg-transparent backdrop-blur-none",
+            "w-full max-h-[70vh] p-6 pb-8 border-b-0 rounded-3xl z-20 transition-all duration-300",
+            !isOpen && "h-[42vh] bg-transparent dark:bg-transparent backdrop-blur-none",
           )}
         >
           <div className="flex justify-center -mt-4">
@@ -122,10 +127,10 @@ const MovieInfo = ({
             </div>
           </div>
 
-          <div className="flex flex-col justify-between gap-6 mt-4">
-            <div className="flex flex-col gap-4">
+          <div className="flex flex-col justify-between gap-6 mt-4 overflow-y-auto max-h-[calc(70vh-150px)] scrollbar-none">
+            <div className="flex flex-col gap-1">
               {movie?.genres?.length > 0 && (
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 mb-2">
                   {movie.genres.map((genre) => (
                     <span
                       key={movie?.id?.toString() + genre?.id}
@@ -137,44 +142,84 @@ const MovieInfo = ({
                 </div>
               )}
 
-              <p className="text-sm ">{movie?.overview}</p>
+              <p className="text-sm">{movie?.overview}</p>
 
-              {/* {movie.actors && (
+              {movie.cast && (
                 <div>
-                  <h3 className="text-sm font-semibold">Actors:</h3>
+                  <h3 className="text-sm font-bold">Actors:</h3>
                   <div className="flex items-start flex-nowrap gap-4 overflow-x-auto py-2">
-                    {movie.actors.map((actor) => (
+                    {movie.cast.map((actor) => (
                       <div
                         className="flex flex-col w-20 justify-center items-center gap-2"
                         key={actor.id}
                       >
                         <div className="overflow-hidden rounded-full w-14 h-14">
                           <Picture
-                            src={actor?.photoUrl}
+                            src={
+                              actor?.profilePath
+                                ? BASE_IMAGE_URL + actor?.profilePath
+                                : "/data/image.png"
+                            }
                             alt={actor.name}
                             width={64}
                             height={64}
                             className="object-cover w-full h-full"
                           />
                         </div>
-                        <p className="text-sm font-light text-center leading-none">{actor.name}</p>
+                        <p className="text-xs font-light text-center leading-none">{actor.name}</p>
                       </div>
                     ))}
                   </div>
                 </div>
-              )} */}
+              )}
+
+              {movie?.companies?.length && (
+                <div className="text-sm">
+                  <h3 className="mr-2 font-bold">Production Studios:</h3>
+                  {movie.companies.map((company) => (
+                    <span
+                      key={company.id}
+                      className="inline-flex items-center mr-2 not-last:after:content-[',']"
+                    >
+                      {company.name}
+                    </span>
+                  ))}
+                </div>
+              )}
+
+              <p className="text-sm">
+                <b className="mr-2">Production Countries:</b>
+                {movie?.productionCountries?.length > 0
+                  ? movie.productionCountries.map((countryCode) => (
+                      <span
+                        key={countryCode}
+                        className="inline-flex items-center mr-2 not-last:after:content-[',']"
+                      >
+                        <Image
+                          src={`https://flagcdn.com/w40/${countryCode.toLowerCase()}.png`}
+                          alt={getCountryName(countryCode)}
+                          width={20}
+                          height={15}
+                          className="mr-1 rounded-xs"
+                        />
+                        {getCountryName(countryCode)}
+                      </span>
+                    ))
+                  : "N/A"}
+              </p>
             </div>
 
-            {/* {movie?.trailerUrl && (
+            {movie?.trailerKey && (
               <Link
-                className="flex items-center gap-2 justify-center rounded-full h-14 px-5 text-lg font-bold text-background bg-foreground hover:bg-foreground/90"
-                href={movie.trailerUrl}
+                className="flex items-center gap-2 justify-center rounded-full min-h-14 px-5 text-lg font-bold text-background bg-foreground hover:bg-foreground/90"
+                href={`https://www.youtube.com/watch?v=${movie.trailerKey}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
+                <Image src="/youtube_logo.svg" alt="YouTube" width={24} height={24} />
                 Watch trailer <ExternalLink size={18} />
               </Link>
-            )} */}
+            )}
           </div>
         </GlassArea>
       </motion.div>
