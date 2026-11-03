@@ -5,6 +5,7 @@ import { Session } from "next-auth";
 import { SessionProvider, signOut } from "next-auth/react";
 import { ReactNode, useState } from "react";
 import { AuthError } from "@/shared/api/api";
+import NotificationContainer from "../ui/NotificationContainer";
 // import { useNotification } from "../hooks/useNotification";
 
 export default function Providers({
@@ -49,6 +50,7 @@ export default function Providers({
   return (
     <SessionProvider session={session}>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+      <NotificationContainer />
     </SessionProvider>
   );
 }

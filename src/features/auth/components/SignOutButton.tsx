@@ -4,8 +4,10 @@ import { cn } from "@/shared/libs/utils";
 import Button from "@/shared/ui/Button";
 import { LogOut } from "lucide-react";
 import { signOut } from "next-auth/react";
+import { useTranslations } from "next-intl";
 
 const SignOutButton = ({ className, ...props }: React.ButtonHTMLAttributes<HTMLButtonElement>) => {
+  const t = useTranslations("auth");
   return (
     <Button
       variant="danger"
@@ -14,7 +16,7 @@ const SignOutButton = ({ className, ...props }: React.ButtonHTMLAttributes<HTMLB
       onClick={() => signOut({ callbackUrl: "/" })}
       {...props}
     >
-      <LogOut /> Log out
+      <LogOut /> {t("signOut")}
     </Button>
   );
 };

@@ -9,10 +9,13 @@ import { RegisterFormValues, registerSchema } from "../schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useNotification } from "@/shared/hooks/useNotification";
+import { useTranslations } from "next-intl";
 
 const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const t = useTranslations("auth");
+  const tCommon = useTranslations("common");
 
   const { mutate: registration, isPending } = useRegister();
   const { notify } = useNotification();
@@ -35,8 +38,8 @@ const RegisterForm = () => {
   const onSubmit = async (data: RegisterFormValues) => {
     registration(data, {
       onSuccess: () => {
-        notify("success", "You have successfully created your account.");
-        notify("info", "Please enter your nickname.");
+        notify("success", t("notifications.registerSuccess"));
+        notify("info", t("notifications.enterNickname"));
         router.push("/profile/create");
       },
       onError: (error) => {
@@ -48,19 +51,19 @@ const RegisterForm = () => {
 
   return (
     <>
-      <h1 className="text-center text-2xl font-bold">Register Form</h1>
+      <h1 className="text-center text-2xl font-bold">{t("register.title")}</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col gap-2 mb-4">
           <Input
             id="email"
-            label="Email"
+            label={t("fields.email")}
             type="email"
             hSize="large"
             error={{ isError: !!errors.email, message: errors.email?.message }}
             {...register("email")}
           />
           <Input
-            label="Password"
+            label={t("fields.password")}
             type={showPassword ? "text" : "password"}
             hSize="large"
             after={
@@ -72,7 +75,7 @@ const RegisterForm = () => {
             {...register("password")}
           />
           <Input
-            label="Confirm password"
+            label={t("fields.confirmPassword")}
             type={showConfirmPassword ? "text" : "password"}
             hSize="large"
             after={
@@ -96,7 +99,7 @@ const RegisterForm = () => {
             className="w-full font-normal"
             disabled={isPending}
           >
-            Cancel
+            {tCommon("cancel")}
           </Button>
           <Button
             variant="primary"
@@ -105,7 +108,7 @@ const RegisterForm = () => {
             type="submit"
             loading={isPending}
           >
-            Next step
+            {t("register.submit")}
           </Button>
         </div>
       </form>

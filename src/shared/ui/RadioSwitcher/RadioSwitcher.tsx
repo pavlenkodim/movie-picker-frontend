@@ -1,3 +1,4 @@
+"use client";
 import { ReactNode } from "react";
 import GlassArea from "../GlassArea";
 import { cn } from "@/shared/libs/utils";

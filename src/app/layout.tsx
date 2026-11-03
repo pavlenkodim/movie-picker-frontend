@@ -5,7 +5,8 @@ import "./globals.css";
 import Providers from "@/shared/providers";
 import { getServerSession } from "next-auth";
 import { options } from "./api/auth/[...nextauth]/options";
-import NotificationContainer from "@/shared/ui/NotificationContainer";
+import { getLocale } from "next-intl/server";
+import { NextIntlClientProvider } from "next-intl";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -42,12 +43,14 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await getServerSession(options);
+  const locale = await getLocale();
 
   return (
-    <html lang="en" suppressHydrationWarning data-lt-installed="true">
+    <html lang={locale} suppressHydrationWarning data-lt-installed="true">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased h-[95vh]`}>
-        <Providers session={session}>{children}</Providers>
-        <NotificationContainer />
+        <NextIntlClientProvider>
+          <Providers session={session}>{children}</Providers>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

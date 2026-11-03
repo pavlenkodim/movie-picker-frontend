@@ -4,6 +4,7 @@ import { cn } from "@/shared/libs/utils";
 import { CircleCheck, CircleX, Info, TriangleAlert, X } from "lucide-react";
 import Button from "../Button";
 import { useCallback, useEffect } from "react";
+import { useTranslations } from "next-intl";
 
 export type NotificationType = "info" | "success" | "warning" | "error";
 
@@ -29,13 +30,6 @@ const typeIcons = {
   error: <CircleX />,
 };
 
-const typeTitles = {
-  info: "Info",
-  success: "Success",
-  warning: "Warning",
-  error: "Error",
-};
-
 const Notification = ({
   children,
   autoHide = true,
@@ -47,6 +41,14 @@ const Notification = ({
   ...props
 }: NotificationProps) => {
   const handleClose = useCallback(() => onClose(), [onClose]);
+  const t = useTranslations("notifications");
+
+  const typeTitles = {
+    info: t("title.info"),
+    success: t("title.success"),
+    warning: t("title.warning"),
+    error: t("title.error"),
+  };
 
   useEffect(() => {
     if (!autoHide) return;

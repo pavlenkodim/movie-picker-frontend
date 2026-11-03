@@ -4,6 +4,7 @@ import Button from "@/shared/ui/Button";
 import { cn } from "@/shared/libs/utils";
 import { useGoogleLogin } from "../hooks/useGoogleLogin";
 import GoogleIcon from "@/shared/ui/Icons/GoogleIcon";
+import { useTranslations } from "next-intl";
 
 const GoogleSignInButton = ({
   callbackUrl,
@@ -13,6 +14,7 @@ const GoogleSignInButton = ({
   className?: string;
 }) => {
   const { mutate: loginWithGoogle, isPending } = useGoogleLogin();
+  const t = useTranslations("auth");
 
   return (
     <Button
@@ -24,7 +26,7 @@ const GoogleSignInButton = ({
       icon={<GoogleIcon />}
       onClick={() => loginWithGoogle(callbackUrl)}
     >
-      Continue with Google
+      {t("google")}
     </Button>
   );
 };

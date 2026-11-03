@@ -10,12 +10,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useLogin } from "../hooks/useLogin";
 import { Eye, EyeClosed } from "lucide-react";
 import { useNotification } from "@/shared/hooks/useNotification";
+import { useTranslations } from "next-intl";
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
   const { mutate: login, isPending } = useLogin();
   const { notify } = useNotification();
+  const t = useTranslations("auth");
+  const tCommon = useTranslations("common");
 
   const {
     register,
@@ -33,7 +36,7 @@ const LoginForm = () => {
   const onSubmit = async (data: LoginFormValues) => {
     login(data, {
       onSuccess: () => {
-        notify("success", "You have successfully logged into your account.");
+        notify("success", t("notifications.loginSuccess"));
         router.push("/movies");
       },
       onError: (error) => {
@@ -45,12 +48,12 @@ const LoginForm = () => {
 
   return (
     <>
-      <h1 className="text-center text-2xl font-bold">Login Form</h1>
+      <h1 className="text-center text-2xl font-bold">{t("login.title")}</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col gap-2 mb-4">
           <Input
             id="email"
-            label="Email"
+            label={t("fields.email")}
             type="email"
             hSize="large"
             error={{ isError: !!errors.email, message: errors.email?.message }}
@@ -58,7 +61,7 @@ const LoginForm = () => {
           />
           <Input
             id="password"
-            label="Password"
+            label={t("fields.password")}
             type={showPassword ? "text" : "password"}
             hSize="large"
             error={{ isError: !!errors.password, message: errors.password?.message }}
@@ -78,7 +81,7 @@ const LoginForm = () => {
             className="w-full font-normal"
             loading={isPending}
           >
-            Sign In
+            {t("login.submit")}
           </Button>
           <Button
             onClick={() => router.push("/")}
@@ -88,12 +91,12 @@ const LoginForm = () => {
             className="w-full font-normal"
             disabled={isPending}
           >
-            Cancel
+            {tCommon("cancel")}
           </Button>
         </div>
         <div className="mt-4 text-center">
           <Link href="auth/forgot-password" className="text-sm hover:underline">
-            Forgot Password?
+            {t("login.forgotPassword")}
           </Link>
         </div>
       </form>

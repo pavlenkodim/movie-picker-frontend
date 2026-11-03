@@ -1,0 +1,121 @@
+{
+  "common": {
+    "cancel": "Cancel",
+    "or": "or",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use"
+  },
+  "notifications": {
+    "title": {
+      "info": "Info",
+      "success": "Success",
+      "warning": "Warning",
+      "error": "Error"
+    },
+    "code": {}
+  },
+  "landing": {
+    "loginAria": "Log in",
+    "hero": {
+      "badge": "Movie discovery, one swipe at a time",
+      "title": "Find movies \nyou'll love",
+      "subtitle": "Tired of endless scrolling? Swipe, save and discover movies that match your taste — and find the perfect one for tonight",
+      "cta": "Get Started Now"
+    },
+    "howItWorks": {
+      "title": "How It Works",
+      "steps": {
+        "taste": {
+          "title": "Tell Us Your Taste",
+          "description": "Pick the genres you enjoy to get your first recommendations"
+        },
+        "swipe": {
+          "title": "Swipe Left or Right",
+          "description": "Love it? Swipe right. Not for you? Swipe left. Every swipe sharpens your picks"
+        },
+        "enjoy": {
+          "title": "Watch & Enjoy",
+          "description": "Get personalized recommendations and keep every movie you liked in your history"
+        }
+      }
+    },
+    "features": {
+      "title": "Why Filmder?",
+      "items": {
+        "quick": {
+          "title": "Quick Decisions",
+          "description": "Find something to watch in minutes, not hours"
+        },
+        "history": {
+          "title": "Your Movie History",
+          "description": "Every swipe is saved, so you can always come back to the movies you liked"
+        },
+        "smart": {
+          "title": "Smart Recommendations",
+          "description": "Recommendations adapt to your taste with every swipe"
+        },
+        "mobile": {
+          "title": "Mobile First",
+          "description": "Perfect experience on your phone, anywhere"
+        }
+      }
+    },
+    "cta": {
+      "title": "Ready for Movie Night?",
+      "subtitle": "Create a free account and start discovering movies in under a minute",
+      "button": "Start Swiping Now",
+      "note": "No spam, just great recommendations"
+    },
+    "footer": {
+      "tagline": "Making movie night decisions easy.",
+      "copyright": "© {year} Filmder v{version}",
+      "tmdb": "Movie data and images provided by TMDB. This product uses the TMDB API but is not endorsed or certified by TMDB."
+    }
+  },
+  "auth": {
+    "tabs": {
+      "signIn": "Sign In",
+      "signUp": "Sign Up"
+    },
+    "fields": {
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "showPassword": "Show password",
+      "hidePassword": "Hide password"
+    },
+    "login": {
+      "title": "Welcome back",
+      "submit": "Sign In",
+      "forgotPassword": "Forgot password?"
+    },
+    "register": {
+      "title": "Create an account",
+      "submit": "Next step"
+    },
+    "google": "Continue with Google",
+    "signOut": "Log out",
+    "legal": "By continuing, you agree to our <terms>Terms of Use</terms> and acknowledge our <privacy>Privacy Policy</privacy>.",
+    "notifications": {
+      "loginSuccess": "You have successfully logged into your account.",
+      "registerSuccess": "You have successfully created your account.",
+      "enterNickname": "Please enter your nickname.",
+      "loginFailed": "Invalid email or password.",
+      "registerFailed": "Registration failed. Please try again.",
+      "googleFailed": "Sign in with Google failed. Please try again."
+    },
+    "validation": {
+      "emailRequired": "Email is required",
+      "emailInvalid": "Invalid email format",
+      "passwordRequired": "Password is required",
+      "passwordMin": "Password must be at least {min} characters long",
+      "passwordsMismatch": "Passwords don't match"
+    }
+  },
+  "history": {
+    "title": "History"
+  },
+  "profile": {
+    "title": "Profile"
+  }
+}

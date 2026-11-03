@@ -1,6 +1,6 @@
 {
   "name": "movie-picker-frontend",
-  "version": "0.1.14-alfa",
+  "version": "0.1.24-alfa",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -16,6 +16,7 @@
     "lucide-react": "^1.16.0",
     "next": "^16.2.6",
     "next-auth": "^4.24.14",
+    "next-intl": "^4.14.9",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-hook-form": "^7.75.0",
